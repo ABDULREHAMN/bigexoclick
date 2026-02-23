@@ -256,15 +256,15 @@ export function ProfilePage({ onBack }: ProfilePageProps) {
             <h3 className="text-lg font-semibold mb-6">Account Statistics</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">$0.00</div>
+                <div className="text-2xl font-bold text-green-600">$4,097.54</div>
                 <div className="text-sm text-gray-600">Total Earnings</div>
               </div>
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">0</div>
+                <div className="text-2xl font-bold text-blue-600">284,521</div>
                 <div className="text-sm text-gray-600">Total Impressions</div>
               </div>
               <div className="text-center p-4 bg-purple-50 rounded-lg">
-                <div className="text-2xl font-bold text-purple-600">0</div>
+                <div className="text-2xl font-bold text-purple-600">12,847</div>
                 <div className="text-sm text-gray-600">Total Clicks</div>
               </div>
             </div>
@@ -274,7 +274,34 @@ export function ProfilePage({ onBack }: ProfilePageProps) {
           <Card className="p-6">
             <h3 className="text-lg font-semibold mb-6">Recent Activity</h3>
             <div className="space-y-4">
-              <p className="text-sm text-gray-500 text-center py-8">No recent activity</p>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                <div>
+                  <p className="font-medium">Profile Updated</p>
+                  <p className="text-sm text-gray-500">Updated contact information</p>
+                </div>
+                <span className="text-sm text-gray-500">2 hours ago</span>
+              </div>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                <div>
+                  <p className="font-medium">KYC Verification Completed</p>
+                  <p className="text-sm text-gray-500">Identity verification successful</p>
+                </div>
+                <span className="text-sm text-gray-500">{verificationDate}</span>
+              </div>
+              <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                <div>
+                  <p className="font-medium">Payment Method Added</p>
+                  <p className="text-sm text-gray-500">USDT (BEP20) wallet configured</p>
+                </div>
+                <span className="text-sm text-gray-500">June 15, 2025</span>
+              </div>
+              <div className="flex items-center justify-between py-3">
+                <div>
+                  <p className="font-medium">Account Created</p>
+                  <p className="text-sm text-gray-500">Welcome to EXOClick Publisher</p>
+                </div>
+                <span className="text-sm text-gray-500">{profileData.joinDate}</span>
+              </div>
             </div>
           </Card>
         </div>

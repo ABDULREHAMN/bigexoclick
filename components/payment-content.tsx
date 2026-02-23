@@ -31,11 +31,11 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 0.0
+  const availableBalance = 114191.0
   const pendingBalance = 0.0
-  const totalEarnings = 0.0
-  const totalPayments = 0.0
-  const thisMonthEarnings = 0.0
+  const totalEarnings = 115780.0 // Updated Last_6_Months from 114560.0 to 115780.0
+  const totalPayments = 114191.0 // Updated to match available balance
+  const thisMonthEarnings = 657.0 // This_Month: $657.00
   const nextWithdrawalDate = "12 September, 2025"
 
   const withdrawalHistory: WithdrawalDetails[] = []
