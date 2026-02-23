@@ -38,124 +38,9 @@ export function PaymentContent() {
   const thisMonthEarnings = 657.0 // This_Month: $657.00
   const nextWithdrawalDate = "12 September, 2025"
 
-  const withdrawalHistory: WithdrawalDetails[] = [
-    {
-      id: "aug-25-2025",
-      date: "25 August, 2025",
-      method: "Bank Transfer (USA)",
-      amount: "$100,841.00",
-      status: "✅ Withdrawn — Confirmed",
-      details: "ExoClick - Jahnzaib Nadir (Bank of America)",
-      transactionId: "TRC-9823456712",
-      isVerified: true,
-      note: "Company: ExoClick | Account: XXXX-9823 | PDF Receipt Available",
-      confirmationTimestamp: "Reference: TRC-9823456712",
-    },
-    {
-      id: "aug-25-2025-crypto-failed",
-      date: "25 August, 2025",
-      method: "Crypto (USDT-TRC20)",
-      amount: "$100,841.00",
-      status: "failed",
-      details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98akz",
-      transactionId: "TRC20-TX-9823456712",
-      isVerified: false,
-      note: "Invalid or inactive TRC20 wallet address. Refund processing within 15-20 business days.",
-      confirmationTimestamp: "Transaction rejected at blockchain validation",
-    },
-    {
-      id: "july-24-2025",
-      date: "July 24, 2025",
-      method: "Crypto (BEP20)",
-      amount: "$18,187.42",
-      status: "withdrawn",
-      details: "0xb9cE52416d589bCe1AdCd02021BAe4D14202706B",
-      transactionId: "#TX-CR18187-JULY24-REF",
-      isVerified: true,
-      note: "Refund completed successfully. Funds returned to available balance.",
-      confirmationTimestamp: "Refund completed on August 14, 2025",
-    },
-    {
-      id: "june-30-2025",
-      date: "June 30, 2025",
-      method: "PayPal",
-      amount: "$150.00",
-      status: "refunded",
-      details: "rohanjanean56@gmail.com",
-      transactionId: "#TX-PP150-JUNE30-REF",
-      isVerified: true,
-    },
-    {
-      id: "june-12-2025",
-      date: "June 12, 2025",
-      method: "Crypto (BEP20)",
-      amount: "$550.00",
-      status: "withdrawn",
-      details: "0xb9cE...706B",
-      transactionId: "#TX-CR550-JUNE12",
-      isVerified: true,
-    },
-    {
-      id: "june-13-2025",
-      date: "June 13, 2025",
-      method: "PayPal",
-      amount: "$150.00",
-      status: "withdrawn",
-      details: "rohanjanean56@gmail.com",
-      transactionId: "#TX-PP150-JUNE13",
-      isVerified: true,
-    },
-    {
-      id: "may-25-2025",
-      date: "May 25, 2025",
-      method: "Crypto (BEP20)",
-      amount: "$191.87",
-      status: "withdrawn",
-      details: "0xb9cE...706B",
-      transactionId: "#TX-CR191-MAY25",
-      isVerified: true,
-    },
-  ]
+  const withdrawalHistory: WithdrawalDetails[] = []
 
-  const paymentEntries = [
-    {
-      id: "aug-25-2025",
-      date: "25 August, 2025",
-      method: "Bank Transfer (USA)",
-      amount: "$100,841.00",
-      status: "✅ Confirmed — Withdrawn",
-      confirmed_date: "27 August, 2025",
-      bank: "ExoClick - Jahnzaib Nadir (Bank of America)",
-      trace_number: "TRC-9823456712",
-      transaction_id: "TXN-25082025-EXC",
-      bank_reference: "BofA-2025-89734",
-      beneficiary: "Jahnzaib Nadir",
-      country: "USA",
-      note: "Payment successfully confirmed and withdrawn.",
-      file_name: "Payment_Receipt_25082025.pdf",
-    },
-    {
-      id: "aug-25-2025-crypto-failed",
-      date: "25 August, 2025",
-      method: "Cryptocurrency (USDT - TRC20)",
-      amount: "$100,841.00",
-      status: "Failed",
-      receipt_id: "EXO-CRYPTO-TRC20-20250825",
-      wallet_address: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98akz",
-      transaction_id: "TRC20-TX-9823456712",
-      blockchain_network: "TRON (TRC20)",
-      equivalent_usdt: "100,841 USDT",
-      exchange_rate: "1 USDT = 1.00 USD",
-      reason: "Invalid or inactive TRC20 wallet address",
-      processing_notes:
-        "The wallet provided does not exist or cannot accept funds. This transaction was rejected at the blockchain validation step. Refund will be processed automatically within 15–20 business days.",
-      support_email: "support@exoclick.com",
-      support_hotline: "+1-800-555-EXO",
-      issued_by: "ExoClick Payments Department",
-      verification: "Digitally Signed & Verified",
-      file_name: "Crypto_Receipt_25082025.pdf",
-    },
-  ]
+  const paymentEntries = []
 
   const handleAmountChange = (value: string) => {
     setWithdrawAmount(value)
@@ -274,26 +159,9 @@ Generated on: ${new Date().toLocaleDateString()}
     URL.revokeObjectURL(url)
   }
 
-  const recentActivity = [
-    {
-      id: "aug-27-confirmation",
-      date: "27 August, 2025",
-      activity: "All pending payments have been confirmed on 27 August, 2025.",
-      status: "Confirmed",
-      reference: "ExoClick - Jahnzaib Nadir (Bank of America)",
-    },
-  ]
+  const recentActivity = []
 
-  const notifications = [
-    {
-      id: "payment-on-hold",
-      date: "25 August, 2025",
-      title: "Payment On Hold",
-      message:
-        "Your recent payment of $100,841.00 (TRC20 transfer) is currently on hold. The payment could not be completed because the provided TRC20 wallet address was invalid or unverified. As per ExoClick’s policy, withdrawals must be made to KYC-verified accounts only. Once verified, your payment will be reprocessed automatically within 5–7 business days.",
-      status: "Unread",
-    },
-  ]
+  const notifications = []
 
   return (
     <div className="p-6 space-y-6">
