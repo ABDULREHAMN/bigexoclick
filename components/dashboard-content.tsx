@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button"
 import { BarChart } from "./charts/bar-chart"
 import { HourlyChart } from "./charts/hourly-chart"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { dashboardData, getChartData } from "@/lib/dashboard-data"
 
 type DashboardView = "default" | "new"
 type WidgetType = "default" | "today" | "hourly"
@@ -434,10 +435,10 @@ export function DashboardContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value="17,500" date="October 9, 2025" />
-        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value="440" date="October 9, 2025" />
-        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value="$580.00" date="October 9, 2025" />
-        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value="2.5%" date="October 9, 2025" />
+        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="March 17, 2025" />
+        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="March 17, 2025" />
+        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="March 17, 2025" />
+        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="March 17, 2025" />
       </div>
 
       {/* Filters */}
@@ -489,11 +490,11 @@ export function DashboardContent() {
 
         <Card className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-            <EarningsStat title="Total Revenue" value="$114,877.20" valueColor="text-green-500" />
-            <EarningsStat title="Previous Month" value="$72.90" />
-            <EarningsStat title="Today's eCPM" value="$951" valueColor="text-purple-500" />
-            <EarningsStat title="Total Clicks" value="46" valueColor="text-blue-500" />
-            <EarningsStat title="Impressions" value="4,100" />
+            <EarningsStat title="Total Revenue" value={`$${dashboardData.metrics.thisMonth.revenue.toFixed(2)}`} valueColor="text-green-500" />
+            <EarningsStat title="Last Month" value={`$${dashboardData.metrics.lastMonth.revenue.toFixed(2)}`} />
+            <EarningsStat title="Last 6 Months" value={`$${dashboardData.metrics.last6Months.revenue.toFixed(2)}`} valueColor="text-blue-500" />
+            <EarningsStat title="Total Clicks" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} valueColor="text-blue-500" />
+            <EarningsStat title="Impressions" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} />
           </div>
 
           <div className="h-64">
