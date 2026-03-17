@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import Image from "next/image"
 
 const VALID_USERNAME = "lustifysex"
 const VALID_PASSWORD = "Lusti@007"
@@ -49,16 +50,32 @@ export function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4">
+      {/* Logo Header at Top */}
+      <div className="mb-12">
+        <Image
+          src="/exoclick-logo.png"
+          alt="ExoClick Logo"
+          width={250}
+          height={80}
+          priority
+          className="h-auto w-auto"
+        />
+      </div>
+
       <div className="w-full max-w-md">
         {/* Card Container */}
-        <div className="bg-white rounded-lg shadow-lg p-8 md:p-10">
-          {/* Logo */}
+        <div className="bg-white rounded-lg shadow-md p-8 md:p-10">
+          {/* Logo inside card */}
           <div className="flex justify-center mb-8">
-            <div className="text-4xl font-bold">
-              <span className="text-gray-800">exo</span>
-              <span className="text-blue-600">Click</span>
-            </div>
+            <Image
+              src="/exoclick-logo.png"
+              alt="ExoClick Logo"
+              width={200}
+              height={60}
+              priority
+              className="h-auto w-auto max-h-14"
+            />
           </div>
 
           {/* Form */}
@@ -147,6 +164,18 @@ export function LoginPage() {
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Logo at bottom */}
+      <div className="mt-12">
+        <Image
+          src="/exoclick-logo.png"
+          alt="ExoClick Logo"
+          width={150}
+          height={50}
+          priority
+          className="h-auto w-auto opacity-60"
+        />
       </div>
     </div>
   )
