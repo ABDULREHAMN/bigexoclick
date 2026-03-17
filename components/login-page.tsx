@@ -49,25 +49,25 @@ export function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        {/* Login Container - Ultra flat, minimal shadow */}
-        <div className="bg-white border border-gray-100 rounded-lg p-8 md:p-12">
-          {/* Logo - Single, Smaller, Balanced */}
-          <div className="flex justify-center mb-10">
-            <Image
-              src="/exoclick-logo.png"
-              alt="ExoClick Logo"
-              width={160}
-              height={50}
-              priority
-              className="h-auto w-auto"
-            />
-          </div>
+      <div className="w-full max-w-lg">
+        {/* Logo */}
+        <div className="flex justify-center mb-12">
+          <Image
+            src="/exoclick-logo.png"
+            alt="ExoClick Logo"
+            width={200}
+            height={80}
+            priority
+            className="h-auto w-auto"
+          />
+        </div>
 
+        {/* Login Form Container */}
+        <div className="w-full">
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-8">
+          <form onSubmit={handleLogin} className="space-y-6">
             {/* Username Field */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <label htmlFor="username" className="block text-sm font-medium text-blue-600">
                 Username
               </label>
@@ -78,12 +78,12 @@ export function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isLoading}
-                className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800"
+                className="w-full px-0 py-2 border-0 border-b border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800"
               />
             </div>
 
             {/* Password Field */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <label htmlFor="password" className="block text-sm font-medium text-blue-600">
                 Password
               </label>
@@ -95,7 +95,7 @@ export function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800"
+                  className="w-full px-0 py-2 border-0 border-b border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800"
                 />
                 <button
                   type="button"
@@ -109,10 +109,10 @@ export function LoginPage() {
             </div>
 
             {/* Error Message */}
-            {error && <div className="text-sm text-red-600 font-medium">{error}</div>}
+            {error && <div className="text-sm text-red-600 font-medium mt-4">{error}</div>}
 
             {/* Links */}
-            <div className="flex justify-between text-sm pt-2">
+            <div className="flex justify-between text-sm pt-4">
               <Link href="#" className="text-blue-600 hover:text-blue-700 font-medium">
                 Verify your email
               </Link>
@@ -125,7 +125,7 @@ export function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading || !isFormValid}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 rounded transition-colors duration-200 mt-6"
+              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 rounded text-base mt-8"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -138,13 +138,13 @@ export function LoginPage() {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
+          {/* Divider Section */}
+          <div className="mt-12">
             <p className="text-center text-gray-600 text-sm mb-4">Create an Advertiser or Publisher account:</p>
             <Button
               type="button"
               variant="outline"
-              className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 rounded transition-colors duration-200"
+              className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 hover:border-blue-600 font-bold py-3 rounded text-base bg-white"
             >
               SIGN UP
             </Button>
