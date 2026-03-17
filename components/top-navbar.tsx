@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { ChevronDown, Globe, Search, User, Settings, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -14,13 +15,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { NotificationDropdown } from "./notification-dropdown"
+import { clearLoginSession, getUsername } from "@/lib/auth"
 
 interface TopNavbarProps {
   onNavigate?: (page: string) => void
 }
 
 export function TopNavbar({ onNavigate }: TopNavbarProps) {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState("dashboard")
+  const username = getUsername()
 
   const tabs = [
     { id: "dashboard", label: "Dashboard" },
@@ -32,12 +36,10 @@ export function TopNavbar({ onNavigate }: TopNavbarProps) {
   ]
 
   const handleLogout = () => {
-    // Clear any stored session data
-    localStorage.clear()
-    sessionStorage.clear()
-
-    // Redirect to ExoClick homepage
-    window.location.href = "https://www.exoclick.com/"
+    // Clear session using auth utility
+    clearLoginSession()
+    // Redirect to login page
+    router.push("/login")
   }
 
   const handleViewProfile = () => {
@@ -88,7 +90,7 @@ export function TopNavbar({ onNavigate }: TopNavbarProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="flex items-center space-x-2 hover:bg-gray-100 transition-colors p-2">
-                <span className="text-sm mr-2 text-gray-700 hidden md:inline">a_rehmanexo</span>
+                <span className="text-sm mr-2 text-gray-700 hidden md:inline">{username || "a_rehmanexo"}</span>
                 <span className="text-xs text-gray-500 mr-2 hidden md:inline">Publisher</span>
                 <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
                   <User size={16} className="text-gray-600" />
@@ -102,7 +104,7 @@ export function TopNavbar({ onNavigate }: TopNavbarProps) {
               sideOffset={5}
             >
               <div className="px-3 py-2 border-b border-gray-100">
-                <p className="text-sm font-medium text-gray-900">a_rehmanexo</p>
+                <p className="text-sm font-medium text-gray-900">{username || "a_rehmanexo"}</p>
                 <p className="text-xs text-gray-500">Publisher Account</p>
               </div>
 

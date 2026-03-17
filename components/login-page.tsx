@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import Image from "next/image"
+import { setLoginSession } from "@/lib/auth"
 
 const VALID_USERNAME = "lustifysex"
 const VALID_PASSWORD = "Lusti@007"
@@ -36,9 +37,8 @@ export function LoginPage() {
 
     // Check credentials
     if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-      // Store session
-      localStorage.setItem("isLoggedIn", "true")
-      localStorage.setItem("username", username)
+      // Store session using auth utility
+      setLoginSession(username)
       // Redirect to dashboard
       router.push("/")
     } else {
