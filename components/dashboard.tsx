@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Sidebar } from "./sidebar"
 import { TopNavbar } from "./top-navbar"
@@ -15,6 +17,7 @@ import { KycModal } from "./kyc-modal"
 import { SettingsContent } from "./settings-content"
 import { ProfileModal } from "./profile-modal"
 import LiveChatBot from "./live-chat-bot"
+import { isLoggedIn } from "@/lib/auth"
 
 type PageType = "dashboard" | "payments" | "reports" | "sites" | "campaigns" | "settings" | "profile"
 
@@ -54,6 +57,15 @@ function DashboardContentWrapper() {
 }
 
 export function Dashboard() {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Protect dashboard - redirect to login if not authenticated
+    if (!isLoggedIn()) {
+      router.push("/login")
+    }
+  }, [router])
+
   return (
     <NotificationProvider>
       <KycProvider>
