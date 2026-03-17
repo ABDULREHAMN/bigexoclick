@@ -7,9 +7,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "EXOClick Dashboard",
-  description: "Dashboard UI Clone",
-    generator: 'v0.app'
+  title: "ExoClick - Administrator Panel",
+  description: "Administrator Dashboard",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
