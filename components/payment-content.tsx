@@ -284,16 +284,7 @@ Generated on: ${new Date().toLocaleDateString()}
     },
   ]
 
-  const notifications = [
-    {
-      id: "payment-on-hold",
-      date: "25 August, 2025",
-      title: "Payment On Hold",
-      message:
-        "Your recent payment of $100,841.00 (TRC20 transfer) is currently on hold. The payment could not be completed because the provided TRC20 wallet address was invalid or unverified. As per ExoClick’s policy, withdrawals must be made to KYC-verified accounts only. Once verified, your payment will be reprocessed automatically within 5–7 business days.",
-      status: "Unread",
-    },
-  ]
+
 
   return (
     <div className="p-6 space-y-6">
@@ -660,27 +651,6 @@ Generated on: ${new Date().toLocaleDateString()}
         </div>
 
         <div className="lg:col-span-1 space-y-4">
-          <Card className="p-4">
-            <h3 className="text-lg font-semibold mb-3 flex items-center">
-              <Mail className="mr-2 h-5 w-5" />
-              Notifications
-            </h3>
-            <div className="space-y-3">
-              {notifications.map((notification) => (
-                <div key={notification.id} className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-sm font-medium text-blue-800">{notification.title}</h4>
-                    <Badge variant="outline" className="text-xs bg-blue-100 text-blue-800">
-                      {notification.status}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-blue-600 mb-2">{notification.message}</p>
-                  <p className="text-xs text-gray-500">{notification.date}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
-
           <Card className="p-4">
             <h3 className="text-lg font-semibold mb-3">Verification</h3>
             <div className="text-sm space-y-2">
