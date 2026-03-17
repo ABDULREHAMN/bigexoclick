@@ -1,15 +1,23 @@
 notifications:
   enabled: false
 
+kyc_section:
+  visible: false
+  show_status: false
+  show_documents: false
+  show_upload_link: false
+  show_pending_message: false
+
+support_section:
+  visible: false
+  show_email: false
+  show_website: false
+  show_response_time: false
+
 payment_section:
   show_notifications: false
   show_recent_activity: false
-  show_kyc_status: false
   show_payment_status: false
-
-kyc:
-  required: false
-  show_message: false
 
 withdrawals:
   hold_message: false
@@ -25,7 +33,8 @@ alerts:
 ui:
   banners: false
   popups: false
-  status_boxes: false
+  info_boxes: false
+  status_cards: false
 
-security_notes:
-  show: false
+system_messages:
+  show_all: false

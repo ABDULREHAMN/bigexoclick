@@ -9,8 +9,8 @@ import { config } from "@/lib/config"
 export function KycAlert() {
   const { kycStatus, startKyc } = useKyc()
 
-  // Only show the alert if KYC is not started or rejected, and if required by config
-  if (!config.kyc.required || kycStatus === "verified" || kycStatus === "pending") {
+  // Only show the alert if alerts are enabled and KYC is not verified or pending
+  if (!config.alerts.enabled || kycStatus === "verified" || kycStatus === "pending") {
     return null
   }
 

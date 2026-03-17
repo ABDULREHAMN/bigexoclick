@@ -681,17 +681,21 @@ Generated on: ${new Date().toLocaleDateString()}
             </div>
           </Card>
 
-          <Card className="p-4">
-            <h3 className="text-lg font-semibold mb-3">Support</h3>
-            <div className="text-sm text-gray-800">
-              Need help? Contact ExoClick Finance Team:
-              <div className="mt-2">Email: support@exoclick.com</div>
-              <div>Website: www.exoclick.com</div>
-              <div className="text-gray-600 mt-1">Response time: 24–48 business hours</div>
-            </div>
-          </Card>
+          {config.support_section.visible && (
+            <Card className="p-4">
+              <h3 className="text-lg font-semibold mb-3">Support</h3>
+              <div className="text-sm text-gray-800">
+                Need help? Contact ExoClick Finance Team:
+                {config.support_section.show_email && <div className="mt-2">Email: support@exoclick.com</div>}
+                {config.support_section.show_website && <div>Website: www.exoclick.com</div>}
+                {config.support_section.show_response_time && (
+                  <div className="text-gray-600 mt-1">Response time: 24–48 business hours</div>
+                )}
+              </div>
+            </Card>
+          )}
 
-          {config.payment_section.show_kyc_status && <KycInformationCard />}
+          {config.kyc_section.visible && <KycInformationCard />}
         </div>
       </div>
 
@@ -701,7 +705,7 @@ Generated on: ${new Date().toLocaleDateString()}
         withdrawal={selectedWithdrawal}
       />
 
-      {config.kyc.show_message && <KycPromptModal />}
+      {config.kyc_section.show_pending_message && <KycPromptModal />}
 
       <Dialog open={showBankTransferConfirmation} onOpenChange={setShowBankTransferConfirmation}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
