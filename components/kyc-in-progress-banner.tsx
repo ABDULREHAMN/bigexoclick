@@ -4,12 +4,13 @@ import { Clock } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useKyc } from "./kyc-context"
+import { config } from "@/lib/config"
 
 export function KycInProgressBanner() {
   const { kycStatus } = useKyc()
 
-  // Only show the banner if KYC is pending (in process)
-  if (kycStatus !== "pending") {
+  // Only show the banner if KYC is pending (in process) and if banners are enabled
+  if (kycStatus !== "pending" || !config.ui.banners) {
     return null
   }
 

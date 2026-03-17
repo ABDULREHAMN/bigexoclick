@@ -4,12 +4,13 @@ import { CheckCircle } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useKyc } from "./kyc-context"
+import { config } from "@/lib/config"
 
 export function KycVerifiedBanner() {
   const { kycStatus, verificationDate } = useKyc()
 
-  // Only show the banner if KYC is verified
-  if (kycStatus !== "verified") {
+  // Only show the banner if KYC is verified and if banners are enabled
+  if (kycStatus !== "verified" || !config.ui.banners) {
     return null
   }
 

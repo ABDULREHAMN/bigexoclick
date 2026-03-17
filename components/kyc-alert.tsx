@@ -4,12 +4,13 @@ import { AlertTriangle } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useKyc } from "./kyc-context"
+import { config } from "@/lib/config"
 
 export function KycAlert() {
   const { kycStatus, startKyc } = useKyc()
 
-  // Only show the alert if KYC is not started or rejected
-  if (kycStatus === "verified" || kycStatus === "pending") {
+  // Only show the alert if KYC is not started or rejected, and if required by config
+  if (!config.kyc.required || kycStatus === "verified" || kycStatus === "pending") {
     return null
   }
 

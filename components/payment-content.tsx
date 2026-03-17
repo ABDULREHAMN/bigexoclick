@@ -18,6 +18,7 @@ import { KycInformationCard } from "./kyc-information-card"
 import { WithdrawalRow } from "./withdrawal-row"
 import { PaymentMethodCard } from "./payment-method-card"
 import { WithdrawalDetailsModal, type WithdrawalDetails } from "./withdrawal-details-modal"
+import { config } from "@/lib/config"
 
 export function PaymentContent() {
   const [withdrawAmount, setWithdrawAmount] = useState("")
@@ -305,25 +306,27 @@ Generated on: ${new Date().toLocaleDateString()}
         </div>
       </Card>
 
-      <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
-        <div className="flex items-start space-x-3">
-          <AlertTriangle className="text-yellow-600 mt-1 flex-shrink-0" size={24} />
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-yellow-800 mb-2">⚠️ Payment On Hold</h3>
-            <p className="text-sm text-yellow-800 leading-relaxed">
-              Your latest withdrawal of <strong>$100,841.00</strong> (TRC20 transfer) is currently{" "}
-              <strong>on hold</strong>. The transaction could not be completed due to an invalid or unverified wallet
-              address. Please complete your <strong>KYC verification</strong> to reactivate withdrawal eligibility. Once
-              verified, your funds will be automatically reprocessed within <strong>5–7 business days</strong>.
-            </p>
-            <p className="text-sm text-yellow-800 mt-2">
-              ⚠️ <strong>Note:</strong> Repeated unverified withdrawals may result in temporary dashboard suspension.
-            </p>
+      {config.withdrawals.hold_message && (
+        <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
+          <div className="flex items-start space-x-3">
+            <AlertTriangle className="text-yellow-600 mt-1 flex-shrink-0" size={24} />
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">⚠️ Payment On Hold</h3>
+              <p className="text-sm text-yellow-800 leading-relaxed">
+                Your latest withdrawal of <strong>$100,841.00</strong> (TRC20 transfer) is currently{" "}
+                <strong>on hold</strong>. The transaction could not be completed due to an invalid or unverified wallet
+                address. Please complete your <strong>KYC verification</strong> to reactivate withdrawal eligibility. Once
+                verified, your funds will be automatically reprocessed within <strong>5–7 business days</strong>.
+              </p>
+              <p className="text-sm text-yellow-800 mt-2">
+                ⚠️ <strong>Note:</strong> Repeated unverified withdrawals may result in temporary dashboard suspension.
+              </p>
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      )}
 
-      <KycVerifiedBanner />
+      {config.ui.banners && <KycVerifiedBanner />}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 space-y-6">
@@ -333,59 +336,63 @@ Generated on: ${new Date().toLocaleDateString()}
             <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} date="Scheduled withdrawal date" />
           </div>
 
-          <Card className="p-4 bg-green-50 border-green-200">
-            <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
-              <CheckCircle className="mr-2 h-5 w-5" />
-              Recent Activity
-            </h3>
-            <div className="space-y-2">
-              {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center justify-between p-3 bg-white rounded-lg">
-                  <div>
-                    <p className="text-sm font-medium text-green-800">{activity.activity}</p>
-                    <p className="text-xs text-green-600">{activity.reference}</p>
+          {config.payment_section.show_recent_activity && (
+            <Card className="p-4 bg-green-50 border-green-200">
+              <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
+                <CheckCircle className="mr-2 h-5 w-5" />
+                Recent Activity
+              </h3>
+              <div className="space-y-2">
+                {recentActivity.map((activity) => (
+                  <div key={activity.id} className="flex items-center justify-between p-3 bg-white rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium text-green-800">{activity.activity}</p>
+                      <p className="text-xs text-green-600">{activity.reference}</p>
+                    </div>
+                    <div className="text-right">
+                      <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
+                        {activity.status}
+                      </Badge>
+                      <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                      {activity.status}
-                    </Badge>
-                    <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
+                ))}
+              </div>
+            </Card>
+          )}
 
-          <Card className="p-4 bg-red-50 border-red-200">
-            <h3 className="text-lg font-semibold text-red-800 mb-3">Current Payment On Hold</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-              <div>
-                <strong>Date:</strong> 25 August, 2025
+          {config.payment_section.show_payment_status && (
+            <Card className="p-4 bg-red-50 border-red-200">
+              <h3 className="text-lg font-semibold text-red-800 mb-3">Current Payment On Hold</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <strong>Date:</strong> 25 August, 2025
+                </div>
+                <div>
+                  <strong>Amount:</strong> $100,841.00
+                </div>
+                <div>
+                  <strong>Method:</strong> Crypto TRC20 Wallet
+                </div>
+                <div>
+                  <strong>Status:</strong> On Hold
+                </div>
+                <div className="md:col-span-2">
+                  <strong>Address:</strong> TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz
+                </div>
+                <div className="md:col-span-2">
+                  <strong>Reason:</strong> Transaction returned — unverified or invalid wallet address
+                </div>
+                <div>
+                  <strong>Last Update:</strong> 6 October, 2025
+                </div>
               </div>
-              <div>
-                <strong>Amount:</strong> $100,841.00
+              <div className="mt-3 p-3 bg-white border border-red-200 rounded text-sm text-red-800">
+                Please complete your KYC verification to reactivate your withdrawal eligibility. Once verified, your
+                payment will be reprocessed automatically within 5–7 business days.
               </div>
-              <div>
-                <strong>Method:</strong> Crypto TRC20 Wallet
-              </div>
-              <div>
-                <strong>Status:</strong> On Hold
-              </div>
-              <div className="md:col-span-2">
-                <strong>Address:</strong> TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz
-              </div>
-              <div className="md:col-span-2">
-                <strong>Reason:</strong> Transaction returned — unverified or invalid wallet address
-              </div>
-              <div>
-                <strong>Last Update:</strong> 6 October, 2025
-              </div>
-            </div>
-            <div className="mt-3 p-3 bg-white border border-red-200 rounded text-sm text-red-800">
-              Please complete your KYC verification to reactivate your withdrawal eligibility. Once verified, your
-              payment will be reprocessed automatically within 5–7 business days.
-            </div>
-          </Card>
+            </Card>
+          )}
 
           <Tabs defaultValue="withdraw" className="space-y-6">
             <TabsList>
@@ -684,7 +691,7 @@ Generated on: ${new Date().toLocaleDateString()}
             </div>
           </Card>
 
-          <KycInformationCard />
+          {config.payment_section.show_kyc_status && <KycInformationCard />}
         </div>
       </div>
 
@@ -694,7 +701,7 @@ Generated on: ${new Date().toLocaleDateString()}
         withdrawal={selectedWithdrawal}
       />
 
-      <KycPromptModal />
+      {config.kyc.show_message && <KycPromptModal />}
 
       <Dialog open={showBankTransferConfirmation} onOpenChange={setShowBankTransferConfirmation}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">

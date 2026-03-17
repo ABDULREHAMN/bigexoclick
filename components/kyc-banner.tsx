@@ -5,11 +5,12 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useKyc } from "./kyc-context"
+import { config } from "@/lib/config"
 
 export function KycBanner() {
   const { kycStatus, startKyc } = useKyc()
 
-  if (kycStatus === "verified") {
+  if (kycStatus === "verified" || !config.ui.banners) {
     return null
   }
 
