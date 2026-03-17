@@ -50,31 +50,19 @@ export function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 relative">
-      {/* Logo at Top */}
-      <div className="absolute top-8 left-0 right-0 flex justify-center">
-        <Image
-          src="/exoclick-logo.jpg"
-          alt="ExoClick Logo"
-          width={180}
-          height={60}
-          priority
-          className="h-auto w-auto max-h-16"
-        />
-      </div>
-
-      <div className="w-full max-w-md mt-20">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
         {/* Login Card Container */}
-        <div className="bg-white rounded-xl shadow-lg p-8 md:p-10">
-          {/* Logo in Card Header */}
-          <div className="flex justify-center mb-10">
+        <div className="bg-white rounded-lg shadow-md p-8 md:p-10">
+          {/* Logo - ONLY ONE */}
+          <div className="flex justify-center mb-8">
             <Image
-              src="/exoclick-logo.jpg"
+              src="/exoclick-logo.png"
               alt="ExoClick Logo"
-              width={220}
-              height={70}
+              width={200}
+              height={60}
               priority
-              className="h-auto w-auto max-h-20"
+              className="h-auto w-auto"
             />
           </div>
 
@@ -82,7 +70,7 @@ export function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Username Field */}
             <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-semibold text-blue-600">
+              <label htmlFor="username" className="block text-sm font-medium text-blue-600">
                 Username
               </label>
               <Input
@@ -92,13 +80,13 @@ export function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isLoading}
-                className="w-full px-0 py-2.5 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800 transition-colors"
+                className="w-full px-0 py-3 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800 transition-colors"
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-semibold text-blue-600">
+              <label htmlFor="password" className="block text-sm font-medium text-blue-600">
                 Password
               </label>
               <div className="relative">
@@ -109,7 +97,7 @@ export function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full px-0 py-2.5 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800 transition-colors"
+                  className="w-full px-0 py-3 border-0 border-b-2 border-gray-300 focus:border-blue-600 focus:ring-0 rounded-none placeholder:text-gray-400 bg-transparent text-gray-800 transition-colors"
                 />
                 <button
                   type="button"
@@ -123,9 +111,7 @@ export function LoginPage() {
             </div>
 
             {/* Error Message */}
-            {error && (
-              <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md font-medium">{error}</div>
-            )}
+            {error && <div className="text-sm text-red-600 bg-red-50 p-3 rounded font-medium">{error}</div>}
 
             {/* Links */}
             <div className="flex justify-between text-sm pt-2">
@@ -141,11 +127,11 @@ export function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all duration-200 mt-8 text-lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded transition-all duration-200 mt-8"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
-                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   LOGGING IN
                 </div>
               ) : (
@@ -155,50 +141,17 @@ export function LoginPage() {
           </form>
 
           {/* Divider */}
-          <div className="mt-10 pt-8 border-t border-gray-200">
-            <p className="text-center text-gray-600 text-sm mb-4 font-medium">Create an Advertiser or Publisher account:</p>
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-center text-gray-600 text-sm mb-4">Create an Advertiser or Publisher account:</p>
             <Button
               type="button"
               variant="outline"
-              className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 rounded-lg transition-all duration-200"
+              className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 rounded transition-all duration-200"
             >
               SIGN UP
             </Button>
           </div>
         </div>
-
-        {/* Logo at Bottom */}
-        <div className="flex justify-center mt-12">
-          <Image
-            src="/exoclick-logo.jpg"
-            alt="ExoClick Logo"
-            width={140}
-            height={45}
-            priority
-            className="h-auto w-auto opacity-50 hover:opacity-70 transition-opacity"
-          />
-        </div>
-      </div>
-
-      {/* Corner Logo Elements (subtle background accents) */}
-      <div className="absolute bottom-8 right-8 opacity-10">
-        <Image
-          src="/exoclick-logo.jpg"
-          alt="ExoClick Logo"
-          width={100}
-          height={33}
-          className="h-auto w-auto"
-        />
-      </div>
-
-      <div className="absolute top-1/3 left-8 opacity-5">
-        <Image
-          src="/exoclick-logo.jpg"
-          alt="ExoClick Logo"
-          width={120}
-          height={40}
-          className="h-auto w-auto"
-        />
       </div>
     </div>
   )
