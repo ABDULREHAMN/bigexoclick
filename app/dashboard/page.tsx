@@ -2,18 +2,17 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { Dashboard } from "@/components/dashboard"
 import { isLoggedIn } from "@/lib/auth"
 
-export default function Home() {
+export default function DashboardPage() {
   const router = useRouter()
 
   useEffect(() => {
-    if (isLoggedIn()) {
-      router.push("/dashboard")
-    } else {
+    if (!isLoggedIn()) {
       router.push("/login")
     }
   }, [router])
 
-  return null
+  return <Dashboard />
 }
