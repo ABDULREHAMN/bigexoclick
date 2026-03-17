@@ -4,8 +4,9 @@ import { Download, Filter, RefreshCw, Loader2 } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { dashboardData, getReportData } from "@/lib/dashboard-data"
+import { dashboardData } from "@/lib/dashboard-data"
 
+// Report data imported from dashboard configuration
 const reportData = dashboardData.reports
 
 export function ReportContent() {
