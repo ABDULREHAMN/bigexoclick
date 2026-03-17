@@ -4,80 +4,8 @@ import { Download, Filter, RefreshCw, Loader2 } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-
-// Sample data for different filters - Updated with September-October 2025 data
-const reportData = {
-  "Last 7 Days": {
-    "All Countries": {
-      "All Devices": [
-        { date: "December 7, 2025", impressions: "4,100", clicks: "46", ctr: "1.12%", revenue: "$3.90", ecpm: "$951" },
-        {
-          date: "December 6, 2025",
-          impressions: "11,800",
-          clicks: "125",
-          ctr: "1.05%",
-          revenue: "$3.30",
-          ecpm: "$279",
-        },
-        {
-          date: "December 5, 2025",
-          impressions: "13,200",
-          clicks: "142",
-          ctr: "1.07%",
-          revenue: "$3.80",
-          ecpm: "$287",
-        },
-        {
-          date: "December 4, 2025",
-          impressions: "14,000",
-          clicks: "150",
-          ctr: "1.07%",
-          revenue: "$4.00",
-          ecpm: "$285",
-        },
-        {
-          date: "December 3, 2025",
-          impressions: "14,500",
-          clicks: "155",
-          ctr: "1.06%",
-          revenue: "$4.20",
-          ecpm: "$289",
-        },
-        {
-          date: "December 2, 2025",
-          impressions: "15,000",
-          clicks: "160",
-          ctr: "1.06%",
-          revenue: "$4.50",
-          ecpm: "$300",
-        },
-        {
-          date: "December 1, 2025",
-          impressions: "16,000",
-          clicks: "175",
-          ctr: "1.09%",
-          revenue: "$5.00",
-          ecpm: "$312",
-        },
-      ],
-      Desktop: [
-        { date: "December 7, 2025", impressions: "2,870", clicks: "32", ctr: "1.11%", revenue: "$2.73", ecpm: "$951" },
-        { date: "December 6, 2025", impressions: "8,260", clicks: "87", ctr: "1.05%", revenue: "$2.31", ecpm: "$279" },
-        { date: "December 5, 2025", impressions: "9,240", clicks: "99", ctr: "1.07%", revenue: "$2.66", ecpm: "$287" },
-        { date: "December 4, 2025", impressions: "9,800", clicks: "105", ctr: "1.07%", revenue: "$2.80", ecpm: "$285" },
-        {
-          date: "December 3, 2025",
-          impressions: "10,150",
-          clicks: "108",
-          ctr: "1.06%",
-          revenue: "$2.94",
-          ecpm: "$289",
-        },
-        {
-          date: "December 2, 2025",
-          impressions: "10,500",
-          clicks: "112",
-          ctr: "1.06%",
+import { dashboardData, getReportData } from "@/lib/dashboard-data"
+const reportData = dashboardData.reports
           revenue: "$3.15",
           ecpm: "$300",
         },
