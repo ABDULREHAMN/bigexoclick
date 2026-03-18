@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Build v7 - Cache cleared, hydration fixed
+// Build v8 - Force cache clear
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
