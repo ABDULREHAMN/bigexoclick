@@ -32,10 +32,10 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 114191.0
+  const availableBalance = 115342.0
   const pendingBalance = 0.0
-  const totalEarnings = 115780.0 // Updated Last_6_Months from 114560.0 to 115780.0
-  const totalPayments = 114191.0 // Updated to match available balance
+  const totalEarnings = 115342.0
+  const totalPayments = 115342.0
   const thisMonthEarnings = 657.0 // This_Month: $657.00
   const nextWithdrawalDate = "12 September, 2025"
 
@@ -333,7 +333,9 @@ Generated on: ${new Date().toLocaleDateString()}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
-            <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} date="Scheduled withdrawal date" />
+            {!config.dashboard.hide_next_withdraw_section && (
+              <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} date="Scheduled withdrawal date" />
+            )}
           </div>
 
           {config.payment_section.show_recent_activity && (

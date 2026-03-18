@@ -32,6 +32,9 @@ export const config = {
   alerts: {
     enabled: false,
   },
+  dashboard: {
+    hide_next_withdraw_section: true,
+  },
   ui: {
     banners: false,
     popups: false,
