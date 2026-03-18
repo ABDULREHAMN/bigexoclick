@@ -435,10 +435,10 @@ export function DashboardContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="March 17, 2025" />
-        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="March 17, 2025" />
-        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="March 17, 2025" />
-        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="March 17, 2025" />
+        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.today.impressions.toLocaleString()} date="Today" />
+        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.today.clicks.toLocaleString()} date="Today" />
+        <MetricCard icon={DollarSign} iconColor="text-green-500" title="REVENUE" value={`$${dashboardData.metrics.today.revenue.toFixed(2)}`} date="Today" />
+        <MetricCard icon={BarChart2} iconColor="text-red-500" title="ECPM" value={`$${dashboardData.metrics.today.ecpm.toFixed(2)}`} date="Today" />
       </div>
 
       {/* Filters */}
