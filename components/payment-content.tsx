@@ -22,7 +22,7 @@ import { config } from "@/lib/config"
 
 export function PaymentContent() {
   const [withdrawAmount, setWithdrawAmount] = useState("")
-  const [paymentMethod, setPaymentMethod] = useState("crypto-bep20")
+  const [paymentMethod, setPaymentMethod] = useState("crypto-trc20")
   const [paypalEmail, setPaypalEmail] = useState("")
   const [showError, setShowError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -394,12 +394,12 @@ Generated on: ${new Date().toLocaleDateString()}
                     <label className="block text-sm font-medium mb-3">Payment Method</label>
                     <RadioGroup value={paymentMethod} onValueChange={handleMethodChange} className="space-y-3">
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="crypto-bep20" id="crypto-bep20" />
-                        <Label htmlFor="crypto-bep20" className="flex items-center space-x-2 cursor-pointer">
+                        <RadioGroupItem value="crypto-trc20" id="crypto-trc20" />
+                        <Label htmlFor="crypto-trc20" className="flex items-center space-x-2 cursor-pointer">
                           <Wallet size={16} />
-                          <span>USDT (BEP20)</span>
-                          <Badge variant="outline" className="text-xs bg-purple-100 text-purple-800">
-                            0x8233c0D192CFb29b87242DD79fdFFC454e75b00c
+                          <span>USDT (TRC20)</span>
+                          <Badge variant="outline" className="text-xs bg-blue-100 text-blue-800">
+                            TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz
                           </Badge>
                         </Label>
                       </div>
@@ -426,15 +426,15 @@ Generated on: ${new Date().toLocaleDateString()}
                     )}
                   </div>
 
-                  {paymentMethod === "crypto-bep20" && (
+                  {paymentMethod === "crypto-trc20" && (
                     <div className="space-y-4">
-                      <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
-                        <h4 className="font-medium text-purple-800 mb-2">USDT (BEP20) - Active</h4>
-                        <p className="text-sm text-purple-600 mb-3">
-                          Send USDT to this BEP20 address
+                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <h4 className="font-medium text-blue-800 mb-2">USDT (TRC20) - Active</h4>
+                        <p className="text-sm text-blue-600 mb-3">
+                          Send USDT to this TRC20 address
                         </p>
-                        <div className="break-all font-mono text-xs text-purple-700 bg-white p-2 rounded border border-purple-100">
-                          0x8233c0D192CFb29b87242DD79fdFFC454e75b00c
+                        <div className="break-all font-mono text-xs text-blue-700 bg-white p-2 rounded border border-blue-100">
+                          TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz
                         </div>
                       </div>
                       <div className="text-xs text-gray-500">
