@@ -386,11 +386,6 @@ Generated on: ${new Date().toLocaleDateString()}
                   <Wallet className="text-green-600" size={32} />
                 </div>
               </Card>
-                      {totalPayments.toFixed(2)} in total payments have been processed
-                    </p>
-                  </div>
-                </div>
-              </Card>
 
               <Card className="p-6">
                 <h2 className="text-lg font-medium mb-4">Withdraw Funds</h2>
