@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Force cache invalidation - v2
+// Build v3 - Clean cache
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
