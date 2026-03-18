@@ -37,21 +37,9 @@ export function PaymentContent() {
   const totalEarnings = 115342.0
   const totalPayments = 115342.0
   const thisMonthEarnings = 657.0 // This_Month: $657.00
-  const nextWithdrawalDate = "12 September, 2025"
+  const nextWithdrawalDate = "—"
 
   const withdrawalHistory: WithdrawalDetails[] = [
-    {
-      id: "aug-25-2025",
-      date: "25 August, 2025",
-      method: "Bank Transfer (USA)",
-      amount: "$100,841.00",
-      status: "✅ Withdrawn — Confirmed",
-      details: "ExoClick - Jahnzaib Nadir (Bank of America)",
-      transactionId: "TRC-9823456712",
-      isVerified: true,
-      note: "Company: ExoClick | Account: XXXX-9823 | PDF Receipt Available",
-      confirmationTimestamp: "Reference: TRC-9823456712",
-    },
     {
       id: "aug-25-2025-crypto-failed",
       date: "25 August, 2025",
@@ -291,21 +279,6 @@ Generated on: ${new Date().toLocaleDateString()}
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Payments</h1>
 
-      {/* ADDED: KYC Verification Pending info banner */}
-      <Card className="p-4 bg-blue-50 border-blue-300 border-2">
-        <div className="flex items-start space-x-3">
-          <div className="text-2xl mt-1 flex-shrink-0">ℹ️</div>
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-blue-800 mb-2">KYC Verification Pending</h3>
-            <p className="text-sm text-blue-800 leading-relaxed">
-              Your KYC verification is currently <strong>pending</strong>. It will be{" "}
-              <strong>completed within 10–12 business days</strong>. Once verified, your pending withdrawals will be
-              automatically processed. Please avoid submitting duplicate KYC requests during this period.
-            </p>
-          </div>
-        </div>
-      </Card>
-
       {config.withdrawals.hold_message && (
         <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
           <div className="flex items-start space-x-3">
@@ -405,18 +378,6 @@ Generated on: ${new Date().toLocaleDateString()}
 
             <TabsContent value="withdraw" className="space-y-6">
               <Card className="p-4 bg-green-50 border-green-200">
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="text-green-600" size={24} />
-                  <div>
-                    <h3 className="text-lg font-medium text-green-800">All Withdrawals Confirmed</h3>
-                    <p className="text-sm text-green-600">
-                      All previous withdrawals have been successfully processed and transferred
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4 bg-green-50 border-green-200">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-medium text-green-800">Available Balance</h3>
@@ -425,13 +386,6 @@ Generated on: ${new Date().toLocaleDateString()}
                   <Wallet className="text-green-600" size={32} />
                 </div>
               </Card>
-
-              <Card className="p-6 bg-blue-50 border-blue-200">
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="text-blue-600" size={24} />
-                  <div>
-                    <h3 className="text-lg font-medium text-blue-800">Total Payments Released</h3>
-                    <p className="text-sm text-blue-600">
                       {totalPayments.toFixed(2)} in total payments have been processed
                     </p>
                   </div>
@@ -494,17 +448,6 @@ Generated on: ${new Date().toLocaleDateString()}
                         <p className="text-sm text-green-600 mb-3">
                           Your USA bank account is connected and ready for withdrawals.
                         </p>
-                        <div className="text-sm">
-                          <div>
-                            <strong>Beneficiary:</strong> Jahnzaib Nadir
-                          </div>
-                          <div>
-                            <strong>Account:</strong> XXXX-9823
-                          </div>
-                          <div>
-                            <strong>Bank:</strong> Bank of America
-                          </div>
-                        </div>
                       </div>
                       <div className="text-xs text-gray-500">
                         Withdrawals complete within 3–5 business days • Unlimited withdrawal limit
@@ -630,23 +573,6 @@ Generated on: ${new Date().toLocaleDateString()}
               <div className="space-y-4">
                 <h2 className="text-lg font-medium">Payment Methods</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <PaymentMethodCard
-                    type="Bank Transfer (USA)"
-                    details="Jahnzaib Nadir - XXXX-9823"
-                    network="Bank of America, Kansas City, MO"
-                    limit="Unlimited"
-                    isDefault={true}
-                    isVerified={true}
-                  />
-                  <PaymentMethodCard
-                    type="USDT (BEP20)"
-                    details="0xb9cE...706B"
-                    network="Binance Smart Chain"
-                    limit="Removed"
-                    isDefault={false}
-                    isVerified={false}
-                    isRemoved={true}
-                  />
                   <Card className="p-4 border-dashed flex items-center justify-center h-40">
                     <Button variant="outline" className="flex items-center bg-transparent">
                       <Wallet className="mr-2" size={16} />
@@ -660,29 +586,6 @@ Generated on: ${new Date().toLocaleDateString()}
         </div>
 
         <div className="lg:col-span-1 space-y-4">
-          <Card className="p-4">
-            <h3 className="text-lg font-semibold mb-3">Verification</h3>
-            <div className="text-sm space-y-2">
-              <div>
-                <strong>Status:</strong> Pending Review
-              </div>
-              <div>
-                <strong>Last KYC Date:</strong> 5 September, 2025
-              </div>
-              <div>
-                <strong>Required Documents:</strong>
-                <ul className="list-disc ml-5 mt-1 space-y-1">
-                  <li>Government-issued Photo ID</li>
-                  <li>Proof of Address (Utility Bill / Bank Statement, not older than 3 months)</li>
-                  <li>Selfie holding your ID</li>
-                </ul>
-              </div>
-              <div className="p-2 bg-blue-50 border border-blue-200 rounded">
-                Upload Link: https://kyc.exoclick.com/verify
-              </div>
-            </div>
-          </Card>
-
           {config.support_section.visible && (
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-3">Support</h3>
