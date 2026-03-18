@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Build v4 - Force cache refresh (2025-03-18)
+// Build v6 - Fixed hydration and removed invalid keys
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
