@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Build v6 - Fixed hydration and removed invalid keys
+// Build v7 - Cache cleared, hydration fixed
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,

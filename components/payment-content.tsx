@@ -22,7 +22,7 @@ import { config } from "@/lib/config"
 
 export function PaymentContent() {
   const [withdrawAmount, setWithdrawAmount] = useState("")
-  const [paymentMethod, setPaymentMethod] = useState("bank-usa")
+  const [paymentMethod, setPaymentMethod] = useState("crypto-bep20")
   const [paypalEmail, setPaypalEmail] = useState("")
   const [showError, setShowError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -37,7 +37,7 @@ export function PaymentContent() {
   const totalEarnings = 115342.0
   const totalPayments = 115342.0
   const thisMonthEarnings = 657.0 // This_Month: $657.00
-  const nextWithdrawalDate = "—"
+  const nextWithdrawalDate = ""
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
@@ -307,7 +307,7 @@ Generated on: ${new Date().toLocaleDateString()}
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
             {!config.dashboard.hide_next_withdraw_section && (
-              <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} date="Scheduled withdrawal date" />
+              <StatsCard title="NEXT WITHDRAWAL" value="" />
             )}
           </div>
 
@@ -394,22 +394,12 @@ Generated on: ${new Date().toLocaleDateString()}
                     <label className="block text-sm font-medium mb-3">Payment Method</label>
                     <RadioGroup value={paymentMethod} onValueChange={handleMethodChange} className="space-y-3">
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="bank-usa" id="bank-usa" />
-                        <Label htmlFor="bank-usa" className="flex items-center space-x-2 cursor-pointer">
-                          <Building2 size={16} />
-                          <span>Bank Transfer (USA)</span>
-                          <Badge variant="outline" className="text-xs bg-green-100 text-green-800">
-                            Unlimited
-                          </Badge>
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="paypal" id="paypal" />
-                        <Label htmlFor="paypal" className="flex items-center space-x-2 cursor-pointer">
-                          <Mail size={16} />
-                          <span>PayPal</span>
-                          <Badge variant="outline" className="text-xs bg-blue-100 text-blue-800">
-                            $5,000 max
+                        <RadioGroupItem value="crypto-bep20" id="crypto-bep20" />
+                        <Label htmlFor="crypto-bep20" className="flex items-center space-x-2 cursor-pointer">
+                          <Wallet size={16} />
+                          <span>USDT (BEP20)</span>
+                          <Badge variant="outline" className="text-xs bg-purple-100 text-purple-800">
+                            0x8233c0D192CFb29b87242DD79fdFFC454e75b00c
                           </Badge>
                         </Label>
                       </div>
@@ -436,31 +426,19 @@ Generated on: ${new Date().toLocaleDateString()}
                     )}
                   </div>
 
-                  {paymentMethod === "bank-usa" && (
+                  {paymentMethod === "crypto-bep20" && (
                     <div className="space-y-4">
-                      <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <h4 className="font-medium text-green-800 mb-2">Bank Transfer (USA) - Active</h4>
-                        <p className="text-sm text-green-600 mb-3">
-                          Your USA bank account is connected and ready for withdrawals.
+                      <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <h4 className="font-medium text-purple-800 mb-2">USDT (BEP20) - Active</h4>
+                        <p className="text-sm text-purple-600 mb-3">
+                          Send USDT to this BEP20 address
                         </p>
+                        <div className="break-all font-mono text-xs text-purple-700 bg-white p-2 rounded border border-purple-100">
+                          0x8233c0D192CFb29b87242DD79fdFFC454e75b00c
+                        </div>
                       </div>
                       <div className="text-xs text-gray-500">
-                        Withdrawals complete within 3–5 business days • Unlimited withdrawal limit
-                      </div>
-                    </div>
-                  )}
-
-                  {paymentMethod === "paypal" && (
-                    <div>
-                      <label className="block text-sm font-medium mb-2">PayPal Email</label>
-                      <Input
-                        type="email"
-                        placeholder="Enter your PayPal email address"
-                        value={paypalEmail}
-                        onChange={(e) => setPaypalEmail(e.target.value)}
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Enter the email associated with your PayPal account
+                        Withdrawals arrive instantly • Unlimited withdrawal limit
                       </div>
                     </div>
                   )}
