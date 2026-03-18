@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Build v8 - Force cache clear
+// Build v9 - Cache invalidation for TRC20 payment update
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
