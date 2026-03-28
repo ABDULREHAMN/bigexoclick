@@ -435,10 +435,10 @@ export function DashboardContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="March 29, 2025" />
-        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="March 29, 2025" />
-        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="March 29, 2025" />
-        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="March 29, 2025" />
+        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2025" />
+        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2025" />
+        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="28 March 2025" />
+        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="28 March 2025" />
       </div>
 
       {/* Filters */}
@@ -490,11 +490,11 @@ export function DashboardContent() {
 
         <Card className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-            <EarningsStat title="Total Revenue" value={`$${dashboardData.metrics.thisMonth.revenue.toFixed(2)}`} valueColor="text-green-500" />
+            <EarningsStat title="This Month" value={`$${dashboardData.metrics.thisMonth.revenue.toFixed(2)}`} date="28 March 2025" valueColor="text-green-500" />
             <EarningsStat title="Last Month" value={`$${dashboardData.metrics.lastMonth.revenue.toFixed(2)}`} />
-            <EarningsStat title="Last 6 Months" value={`$${dashboardData.metrics.last6Months.revenue.toFixed(2)}`} valueColor="text-blue-500" />
-            <EarningsStat title="Total Clicks" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} valueColor="text-blue-500" />
-            <EarningsStat title="Impressions" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} />
+            <EarningsStat title="Last 6 Months" value={`$${dashboardData.metrics.last6Months.revenue.toFixed(2)}`} date="28 March 2025" valueColor="text-blue-500" />
+            <EarningsStat title="Total Clicks" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2025" valueColor="text-blue-500" />
+            <EarningsStat title="Impressions" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2025" />
           </div>
 
           <div className="h-64">
@@ -679,13 +679,15 @@ interface EarningsStatProps {
   title: string
   value: string
   valueColor?: string
+  date?: string
 }
 
-function EarningsStat({ title, value, valueColor = "text-gray-900" }: EarningsStatProps) {
+function EarningsStat({ title, value, valueColor = "text-gray-900", date }: EarningsStatProps) {
   return (
     <div className="text-center">
       <div className="text-sm text-gray-500 mb-1">{title}</div>
       <div className={`text-lg font-semibold ${valueColor}`}>{value}</div>
+      {date && <div className="text-xs text-gray-400 mt-1">{date}</div>}
     </div>
   )
 }
