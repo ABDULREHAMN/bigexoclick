@@ -215,6 +215,7 @@ Generated on: ${new Date().toLocaleDateString()}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
+            <StatsCard title="SCHEDULED PAYMENT" value="Pending" date="Scheduled for 29 March 2026" />
             {!config.dashboard.hide_next_withdraw_section && (
               <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}
