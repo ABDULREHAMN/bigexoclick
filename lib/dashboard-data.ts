@@ -1,12 +1,12 @@
-// Dashboard data service - MARCH 1-18 ONLY
+// Dashboard data service - MARCH 1-29 COMPLETE DATASET
 export const dashboardData = {
   metrics: {
     thisMonth: {
-      revenue: 95,
-      impressions: 3900,
-      clicks: 89,
-      ctr: 2.28,
-      ecpm: 3.1,
+      revenue: 5.8,
+      impressions: 3800,
+      clicks: 85,
+      ctr: 2.24,
+      ecpm: 1.53,
     },
     lastMonth: {
       revenue: 45,
@@ -16,64 +16,135 @@ export const dashboardData = {
       ecpm: 0,
     },
     last6Months: {
-      revenue: 115345,
-      impressions: 60300,
-      clicks: 1471,
-      ctr: 2.44,
-      ecpm: 1912.76,
+      revenue: 140.5,
+      impressions: 99700,
+      clicks: 2338,
+      ctr: 2.34,
+      ecpm: 1.41,
     },
   },
 
-  recentActivity: [],
-
-  // Chart data: Last 6 Months (using totals from config)
-  last6Months: [
-    { date: "Mar 01-18", revenue: 95, impressions: 60300, clicks: 1471 },
+  recentActivity: [
+    { date: "01 Mar", domain: "example.com", impressions: 3200, clicks: 72, revenue: 4.2, ecpm: 1.31 },
+    { date: "02 Mar", domain: "example.com", impressions: 3300, clicks: 74, revenue: 4.4, ecpm: 1.33 },
+    { date: "03 Mar", domain: "example.com", impressions: 3400, clicks: 76, revenue: 4.6, ecpm: 1.35 },
+    { date: "04 Mar", domain: "example.com", impressions: 3500, clicks: 78, revenue: 4.8, ecpm: 1.37 },
+    { date: "05 Mar", domain: "example.com", impressions: 3600, clicks: 80, revenue: 5.0, ecpm: 1.39 },
+    { date: "06 Mar", domain: "example.com", impressions: 3700, clicks: 82, revenue: 5.2, ecpm: 1.41 },
+    { date: "07 Mar", domain: "example.com", impressions: 3800, clicks: 84, revenue: 5.4, ecpm: 1.42 },
+    { date: "08 Mar", domain: "example.com", impressions: 3900, clicks: 86, revenue: 5.6, ecpm: 1.44 },
+    { date: "09 Mar", domain: "example.com", impressions: 3000, clicks: 70, revenue: 4.0, ecpm: 1.33 },
+    { date: "10 Mar", domain: "example.com", impressions: 3100, clicks: 72, revenue: 4.3, ecpm: 1.39 },
+    { date: "11 Mar", domain: "example.com", impressions: 3200, clicks: 74, revenue: 4.5, ecpm: 1.41 },
+    { date: "12 Mar", domain: "example.com", impressions: 3300, clicks: 76, revenue: 4.7, ecpm: 1.42 },
+    { date: "13 Mar", domain: "example.com", impressions: 3400, clicks: 78, revenue: 4.9, ecpm: 1.44 },
+    { date: "14 Mar", domain: "example.com", impressions: 3500, clicks: 80, revenue: 5.1, ecpm: 1.46 },
+    { date: "15 Mar", domain: "example.com", impressions: 3600, clicks: 82, revenue: 5.3, ecpm: 1.47 },
+    { date: "16 Mar", domain: "example.com", impressions: 3700, clicks: 84, revenue: 5.5, ecpm: 1.49 },
+    { date: "17 Mar", domain: "example.com", impressions: 3800, clicks: 86, revenue: 5.7, ecpm: 1.50 },
+    { date: "18 Mar", domain: "example.com", impressions: 3900, clicks: 88, revenue: 5.9, ecpm: 1.51 },
+    { date: "19 Mar", domain: "example.com", impressions: 3000, clicks: 70, revenue: 4.1, ecpm: 1.37 },
+    { date: "20 Mar", domain: "example.com", impressions: 3200, clicks: 73, revenue: 4.4, ecpm: 1.38 },
+    { date: "21 Mar", domain: "example.com", impressions: 3400, clicks: 76, revenue: 4.7, ecpm: 1.38 },
+    { date: "22 Mar", domain: "example.com", impressions: 3600, clicks: 79, revenue: 5.0, ecpm: 1.39 },
+    { date: "23 Mar", domain: "example.com", impressions: 3800, clicks: 82, revenue: 5.3, ecpm: 1.39 },
+    { date: "24 Mar", domain: "example.com", impressions: 3900, clicks: 84, revenue: 5.6, ecpm: 1.44 },
+    { date: "25 Mar", domain: "example.com", impressions: 3000, clicks: 71, revenue: 4.2, ecpm: 1.40 },
+    { date: "26 Mar", domain: "example.com", impressions: 3200, clicks: 74, revenue: 4.6, ecpm: 1.44 },
+    { date: "27 Mar", domain: "example.com", impressions: 3400, clicks: 77, revenue: 5.0, ecpm: 1.47 },
+    { date: "28 Mar", domain: "example.com", impressions: 3600, clicks: 80, revenue: 5.4, ecpm: 1.50 },
+    { date: "29 Mar", domain: "example.com", impressions: 3800, clicks: 85, revenue: 5.8, ecpm: 1.53 },
   ],
 
-  // Reports data organized by period
+  chartData: {
+    last7Days: [
+      { date: "23 Mar", revenue: 5.3, impressions: 3800, clicks: 82 },
+      { date: "24 Mar", revenue: 5.6, impressions: 3900, clicks: 84 },
+      { date: "25 Mar", revenue: 4.2, impressions: 3000, clicks: 71 },
+      { date: "26 Mar", revenue: 4.6, impressions: 3200, clicks: 74 },
+      { date: "27 Mar", revenue: 5.0, impressions: 3400, clicks: 77 },
+      { date: "28 Mar", revenue: 5.4, impressions: 3600, clicks: 80 },
+      { date: "29 Mar", revenue: 5.8, impressions: 3800, clicks: 85 },
+    ],
+    last30Days: [
+      { date: "01 Mar", revenue: 4.2, impressions: 3200, clicks: 72 },
+      { date: "02 Mar", revenue: 4.4, impressions: 3300, clicks: 74 },
+      { date: "03 Mar", revenue: 4.6, impressions: 3400, clicks: 76 },
+      { date: "04 Mar", revenue: 4.8, impressions: 3500, clicks: 78 },
+      { date: "05 Mar", revenue: 5.0, impressions: 3600, clicks: 80 },
+      { date: "06 Mar", revenue: 5.2, impressions: 3700, clicks: 82 },
+      { date: "07 Mar", revenue: 5.4, impressions: 3800, clicks: 84 },
+      { date: "08 Mar", revenue: 5.6, impressions: 3900, clicks: 86 },
+      { date: "09 Mar", revenue: 4.0, impressions: 3000, clicks: 70 },
+      { date: "10 Mar", revenue: 4.3, impressions: 3100, clicks: 72 },
+      { date: "11 Mar", revenue: 4.5, impressions: 3200, clicks: 74 },
+      { date: "12 Mar", revenue: 4.7, impressions: 3300, clicks: 76 },
+      { date: "13 Mar", revenue: 4.9, impressions: 3400, clicks: 78 },
+      { date: "14 Mar", revenue: 5.1, impressions: 3500, clicks: 80 },
+      { date: "15 Mar", revenue: 5.3, impressions: 3600, clicks: 82 },
+      { date: "16 Mar", revenue: 5.5, impressions: 3700, clicks: 84 },
+      { date: "17 Mar", revenue: 5.7, impressions: 3800, clicks: 86 },
+      { date: "18 Mar", revenue: 5.9, impressions: 3900, clicks: 88 },
+      { date: "19 Mar", revenue: 4.1, impressions: 3000, clicks: 70 },
+      { date: "20 Mar", revenue: 4.4, impressions: 3200, clicks: 73 },
+      { date: "21 Mar", revenue: 4.7, impressions: 3400, clicks: 76 },
+      { date: "22 Mar", revenue: 5.0, impressions: 3600, clicks: 79 },
+      { date: "23 Mar", revenue: 5.3, impressions: 3800, clicks: 82 },
+      { date: "24 Mar", revenue: 5.6, impressions: 3900, clicks: 84 },
+      { date: "25 Mar", revenue: 4.2, impressions: 3000, clicks: 71 },
+      { date: "26 Mar", revenue: 4.6, impressions: 3200, clicks: 74 },
+      { date: "27 Mar", revenue: 5.0, impressions: 3400, clicks: 77 },
+      { date: "28 Mar", revenue: 5.4, impressions: 3600, clicks: 80 },
+      { date: "29 Mar", revenue: 5.8, impressions: 3800, clicks: 85 },
+    ],
+  },
+
   reports: {
     "Last 7 Days": {
       "All Countries": {
         "All Devices": [
-          { date: "12 Mar", impressions: "3300", clicks: "78", ctr: "2.36%", revenue: "$4.90", ecpm: "$2.60" },
-          { date: "13 Mar", impressions: "3400", clicks: "80", ctr: "2.35%", revenue: "$5.10", ecpm: "$2.70" },
-          { date: "14 Mar", impressions: "3500", clicks: "83", ctr: "2.37%", revenue: "$5.40", ecpm: "$2.80" },
-          { date: "15 Mar", impressions: "3600", clicks: "85", ctr: "2.36%", revenue: "$5.70", ecpm: "$2.90" },
-          { date: "16 Mar", impressions: "3700", clicks: "88", ctr: "2.38%", revenue: "$6.00", ecpm: "$3.00" },
-          { date: "17 Mar", impressions: "3800", clicks: "90", ctr: "2.37%", revenue: "$6.30", ecpm: "$3.10" },
-          { date: "18 Mar", impressions: "3900", clicks: "89", ctr: "2.28%", revenue: "$6.50", ecpm: "$3.10" },
+          { date: "23 Mar", impressions: "3800", clicks: "82", ctr: "2.16%", revenue: "$5.30", ecpm: "$1.39" },
+          { date: "24 Mar", impressions: "3900", clicks: "84", ctr: "2.15%", revenue: "$5.60", ecpm: "$1.44" },
+          { date: "25 Mar", impressions: "3000", clicks: "71", ctr: "2.37%", revenue: "$4.20", ecpm: "$1.40" },
+          { date: "26 Mar", impressions: "3200", clicks: "74", ctr: "2.31%", revenue: "$4.60", ecpm: "$1.44" },
+          { date: "27 Mar", impressions: "3400", clicks: "77", ctr: "2.26%", revenue: "$5.00", ecpm: "$1.47" },
+          { date: "28 Mar", impressions: "3600", clicks: "80", ctr: "2.22%", revenue: "$5.40", ecpm: "$1.50" },
+          { date: "29 Mar", impressions: "3800", clicks: "85", ctr: "2.24%", revenue: "$5.80", ecpm: "$1.53" },
         ],
       },
     },
     "Last 30 Days": {
       "All Countries": {
         "All Devices": [
-          { date: "01 Mar", impressions: "3200", clicks: "72", ctr: "2.25%", revenue: "$4.20", ecpm: "$2.30" },
-          { date: "02 Mar", impressions: "3300", clicks: "75", ctr: "2.27%", revenue: "$4.50", ecpm: "$2.50" },
-          { date: "03 Mar", impressions: "3400", clicks: "78", ctr: "2.29%", revenue: "$4.80", ecpm: "$2.60" },
-          { date: "04 Mar", impressions: "3500", clicks: "80", ctr: "2.29%", revenue: "$5.00", ecpm: "$2.70" },
-          { date: "05 Mar", impressions: "3600", clicks: "82", ctr: "2.28%", revenue: "$5.20", ecpm: "$2.80" },
-          { date: "06 Mar", impressions: "3700", clicks: "85", ctr: "2.30%", revenue: "$5.50", ecpm: "$2.90" },
-          { date: "07 Mar", impressions: "3800", clicks: "88", ctr: "2.32%", revenue: "$5.80", ecpm: "$3.00" },
-          { date: "08 Mar", impressions: "3900", clicks: "90", ctr: "2.31%", revenue: "$6.00", ecpm: "$3.10" },
-          { date: "09 Mar", impressions: "3000", clicks: "70", ctr: "2.33%", revenue: "$4.00", ecpm: "$2.20" },
-          { date: "10 Mar", impressions: "3100", clicks: "73", ctr: "2.35%", revenue: "$4.30", ecpm: "$2.30" },
-          { date: "11 Mar", impressions: "3200", clicks: "75", ctr: "2.34%", revenue: "$4.60", ecpm: "$2.50" },
-          { date: "12 Mar", impressions: "3300", clicks: "78", ctr: "2.36%", revenue: "$4.90", ecpm: "$2.60" },
-          { date: "13 Mar", impressions: "3400", clicks: "80", ctr: "2.35%", revenue: "$5.10", ecpm: "$2.70" },
-          { date: "14 Mar", impressions: "3500", clicks: "83", ctr: "2.37%", revenue: "$5.40", ecpm: "$2.80" },
-          { date: "15 Mar", impressions: "3600", clicks: "85", ctr: "2.36%", revenue: "$5.70", ecpm: "$2.90" },
-          { date: "16 Mar", impressions: "3700", clicks: "88", ctr: "2.38%", revenue: "$6.00", ecpm: "$3.00" },
-          { date: "17 Mar", impressions: "3800", clicks: "90", ctr: "2.37%", revenue: "$6.30", ecpm: "$3.10" },
-          { date: "18 Mar", impressions: "3900", clicks: "89", ctr: "2.28%", revenue: "$6.50", ecpm: "$3.10" },
-        ],
-      },
-    },
-    "Last 6 Months": {
-      "All Countries": {
-        "All Devices": [
-          { date: "Mar 01-18", impressions: "60300", clicks: "1471", ctr: "2.44%", revenue: "$95.00", ecpm: "$1912.76" },
+          { date: "01 Mar", impressions: "3200", clicks: "72", ctr: "2.25%", revenue: "$4.20", ecpm: "$1.31" },
+          { date: "02 Mar", impressions: "3300", clicks: "74", ctr: "2.24%", revenue: "$4.40", ecpm: "$1.33" },
+          { date: "03 Mar", impressions: "3400", clicks: "76", ctr: "2.24%", revenue: "$4.60", ecpm: "$1.35" },
+          { date: "04 Mar", impressions: "3500", clicks: "78", ctr: "2.23%", revenue: "$4.80", ecpm: "$1.37" },
+          { date: "05 Mar", impressions: "3600", clicks: "80", ctr: "2.22%", revenue: "$5.00", ecpm: "$1.39" },
+          { date: "06 Mar", impressions: "3700", clicks: "82", ctr: "2.22%", revenue: "$5.20", ecpm: "$1.41" },
+          { date: "07 Mar", impressions: "3800", clicks: "84", ctr: "2.21%", revenue: "$5.40", ecpm: "$1.42" },
+          { date: "08 Mar", impressions: "3900", clicks: "86", ctr: "2.21%", revenue: "$5.60", ecpm: "$1.44" },
+          { date: "09 Mar", impressions: "3000", clicks: "70", ctr: "2.33%", revenue: "$4.00", ecpm: "$1.33" },
+          { date: "10 Mar", impressions: "3100", clicks: "72", ctr: "2.32%", revenue: "$4.30", ecpm: "$1.39" },
+          { date: "11 Mar", impressions: "3200", clicks: "74", ctr: "2.31%", revenue: "$4.50", ecpm: "$1.41" },
+          { date: "12 Mar", impressions: "3300", clicks: "76", ctr: "2.30%", revenue: "$4.70", ecpm: "$1.42" },
+          { date: "13 Mar", impressions: "3400", clicks: "78", ctr: "2.29%", revenue: "$4.90", ecpm: "$1.44" },
+          { date: "14 Mar", impressions: "3500", clicks: "80", ctr: "2.29%", revenue: "$5.10", ecpm: "$1.46" },
+          { date: "15 Mar", impressions: "3600", clicks: "82", ctr: "2.28%", revenue: "$5.30", ecpm: "$1.47" },
+          { date: "16 Mar", impressions: "3700", clicks: "84", ctr: "2.27%", revenue: "$5.50", ecpm: "$1.49" },
+          { date: "17 Mar", impressions: "3800", clicks: "86", ctr: "2.26%", revenue: "$5.70", ecpm: "$1.50" },
+          { date: "18 Mar", impressions: "3900", clicks: "88", ctr: "2.26%", revenue: "$5.90", ecpm: "$1.51" },
+          { date: "19 Mar", impressions: "3000", clicks: "70", ctr: "2.33%", revenue: "$4.10", ecpm: "$1.37" },
+          { date: "20 Mar", impressions: "3200", clicks: "73", ctr: "2.28%", revenue: "$4.40", ecpm: "$1.38" },
+          { date: "21 Mar", impressions: "3400", clicks: "76", ctr: "2.24%", revenue: "$4.70", ecpm: "$1.38" },
+          { date: "22 Mar", impressions: "3600", clicks: "79", ctr: "2.19%", revenue: "$5.00", ecpm: "$1.39" },
+          { date: "23 Mar", impressions: "3800", clicks: "82", ctr: "2.16%", revenue: "$5.30", ecpm: "$1.39" },
+          { date: "24 Mar", impressions: "3900", clicks: "84", ctr: "2.15%", revenue: "$5.60", ecpm: "$1.44" },
+          { date: "25 Mar", impressions: "3000", clicks: "71", ctr: "2.37%", revenue: "$4.20", ecpm: "$1.40" },
+          { date: "26 Mar", impressions: "3200", clicks: "74", ctr: "2.31%", revenue: "$4.60", ecpm: "$1.44" },
+          { date: "27 Mar", impressions: "3400", clicks: "77", ctr: "2.26%", revenue: "$5.00", ecpm: "$1.47" },
+          { date: "28 Mar", impressions: "3600", clicks: "80", ctr: "2.22%", revenue: "$5.40", ecpm: "$1.50" },
+          { date: "29 Mar", impressions: "3800", clicks: "85", ctr: "2.24%", revenue: "$5.80", ecpm: "$1.53" },
         ],
       },
     },
@@ -81,18 +152,11 @@ export const dashboardData = {
 }
 
 export function getChartData(period: string) {
-  switch (period) {
-    case "7":
-      return dashboardData.last7Days
-    case "30":
-      return dashboardData.last30Days
-    case "6months":
-      return dashboardData.last6Months
-    default:
-      return dashboardData.last7Days
-  }
+  if (period === "last7" || period === "Last 7 Days") return dashboardData.chartData.last7Days
+  if (period === "last30" || period === "Last 30 Days") return dashboardData.chartData.last30Days
+  return dashboardData.chartData.last30Days
 }
 
 export function getReportData(period: string) {
-  return dashboardData.reports[period as keyof typeof dashboardData.reports] || null
+  return dashboardData.reports[period as keyof typeof dashboardData.reports]
 }
