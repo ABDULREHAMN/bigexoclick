@@ -312,7 +312,7 @@ export function DashboardContent() {
           <div className="space-y-6">
             <Card className="p-6 bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-gray-800">Hourly Breakdown - August 13, 2025 🏆 NEW RECORD!</h3>
+                <h3 className="text-xl font-bold text-gray-800">Hourly Breakdown - 28 March 2026 🎯</h3>
                 <div className="flex items-center space-x-2">
                   <BarChart2 className="h-6 w-6 text-purple-600" />
                   <span className="text-sm text-purple-600 font-medium">24 Hour View</span>
@@ -435,10 +435,10 @@ export function DashboardContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2025" />
-        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2025" />
-        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="28 March 2025" />
-        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="28 March 2025" />
+        <MetricCard icon={Eye} iconColor="text-green-500" title="IMPRESSIONS" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2026" />
+        <MetricCard icon={MousePointer} iconColor="text-blue-500" title="CLICKS" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2026" />
+        <MetricCard icon={DollarSign} iconColor="text-green-500" title="ECPM" value={`$${dashboardData.metrics.thisMonth.ecpm.toFixed(2)}`} date="28 March 2026" />
+        <MetricCard icon={BarChart2} iconColor="text-red-500" title="CTR" value={`${dashboardData.metrics.thisMonth.ctr.toFixed(2)}%`} date="28 March 2026" />
       </div>
 
       {/* Filters */}
@@ -490,11 +490,11 @@ export function DashboardContent() {
 
         <Card className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-            <EarningsStat title="This Month" value={`$${dashboardData.metrics.thisMonth.revenue.toFixed(2)}`} date="28 March 2025" valueColor="text-green-500" />
+            <EarningsStat title="This Month" value={`$${dashboardData.metrics.thisMonth.revenue.toFixed(2)}`} date="28 March 2026" valueColor="text-green-500" />
             <EarningsStat title="Last Month" value={`$${dashboardData.metrics.lastMonth.revenue.toFixed(2)}`} />
-            <EarningsStat title="Last 6 Months" value={`$${dashboardData.metrics.last6Months.revenue.toFixed(2)}`} date="28 March 2025" valueColor="text-blue-500" />
-            <EarningsStat title="Total Clicks" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2025" valueColor="text-blue-500" />
-            <EarningsStat title="Impressions" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2025" />
+            <EarningsStat title="Last 6 Months" value={`$${dashboardData.metrics.last6Months.revenue.toFixed(2)}`} date="28 March 2026" valueColor="text-blue-500" />
+            <EarningsStat title="Total Clicks" value={dashboardData.metrics.thisMonth.clicks.toLocaleString()} date="28 March 2026" valueColor="text-blue-500" />
+            <EarningsStat title="Impressions" value={dashboardData.metrics.thisMonth.impressions.toLocaleString()} date="28 March 2026" />
           </div>
 
           <div className="h-64">
