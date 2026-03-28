@@ -546,6 +546,14 @@ Generated on: ${new Date().toLocaleDateString()}
               <div className="space-y-4">
                 <h2 className="text-lg font-medium">Payment Methods</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <PaymentMethodCard
+                    type="USDT (TRC20)"
+                    details="TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz"
+                    network="TRC20 - TRON Network"
+                    limit="Unlimited"
+                    isDefault={true}
+                    isVerified={true}
+                  />
                   <Card className="p-4 border-dashed flex items-center justify-center h-40">
                     <Button variant="outline" className="flex items-center bg-transparent">
                       <Wallet className="mr-2" size={16} />
