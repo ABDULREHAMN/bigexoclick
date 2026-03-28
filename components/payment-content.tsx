@@ -37,7 +37,7 @@ export function PaymentContent() {
   const totalEarnings = 115342.0
   const totalPayments = 115342.0
   const thisMonthEarnings = 657.0 // This_Month: $657.00
-  const nextWithdrawalDate = ""
+  const nextWithdrawalDate = "29 March 2025"
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
