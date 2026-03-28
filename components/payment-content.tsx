@@ -76,8 +76,8 @@ export function PaymentContent() {
   }
 
   const handleWithdrawalRowClick = (withdrawalId: string) => {
-    const bankTransferIds = ["aug-25-2025"]
-    const cryptoFailedIds = ["aug-25-2025-crypto-failed"]
+  const bankTransferIds = [""]
+  const cryptoFailedIds = [""]
 
     if (bankTransferIds.includes(withdrawalId)) {
       const paymentEntry = paymentEntries.find((entry) => entry.id === withdrawalId)
@@ -162,11 +162,11 @@ Generated on: ${new Date().toLocaleDateString()}
 
   const recentActivity = [
     {
-      id: "aug-27-confirmation",
-      date: "27 August, 2025",
-      activity: "All pending payments have been confirmed on 27 August, 2025.",
-      status: "Confirmed",
-      reference: "ExoClick - Jahnzaib Nadir (Bank of America)",
+      id: "withdrawal-schedule",
+      date: "Withdrawal Schedule",
+      activity: "Withdrawals are processed on the 14th and 29th of every month.",
+      status: "Active",
+      reference: "Standard withdrawal schedule",
     },
   ]
 
@@ -175,6 +175,18 @@ Generated on: ${new Date().toLocaleDateString()}
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Payments</h1>
+
+      <Card className="p-4 bg-blue-50 border-blue-200">
+        <div className="flex items-start space-x-3">
+          <div className="text-lg mt-1">ℹ️</div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-blue-800 mb-1">Withdrawal Schedule</h3>
+            <p className="text-sm text-blue-700">
+              Withdrawals are processed on the 14th and 29th of every month. Next withdrawal scheduled for <strong>29 March 2026</strong>.
+            </p>
+          </div>
+        </div>
+      </Card>
 
       {config.withdrawals.hold_message && (
         <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
@@ -238,7 +250,7 @@ Generated on: ${new Date().toLocaleDateString()}
               <h3 className="text-lg font-semibold text-red-800 mb-3">Current Payment On Hold</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                 <div>
-                  <strong>Date:</strong> 25 August, 2025
+                  <strong>Date:</strong> 28 March 2026
                 </div>
                 <div>
                   <strong>Amount:</strong> $100,841.00
@@ -256,7 +268,7 @@ Generated on: ${new Date().toLocaleDateString()}
                   <strong>Reason:</strong> Transaction returned — unverified or invalid wallet address
                 </div>
                 <div>
-                  <strong>Last Update:</strong> 6 October, 2025
+                  <strong>Last Update:</strong> 28 March 2026
                 </div>
               </div>
               <div className="mt-3 p-3 bg-white border border-red-200 rounded text-sm text-red-800">
@@ -363,21 +375,21 @@ Generated on: ${new Date().toLocaleDateString()}
                 <h2 className="text-lg font-medium mb-3">Refund History</h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>15 August, 2025 — Crypto Wallet (0xb9cE52416d589bCe1AdCd02021BAe4D14202706B)</div>
+                    <div>15 March 2026 — Crypto Wallet (0xb9cE52416d589bCe1AdCd02021BAe4D14202706B)</div>
                     <div className="flex items-center gap-3">
                       <span className="font-semibold text-gray-800">$18,187.42</span>
                       <Badge className="bg-blue-100 text-blue-800">Refunded to Balance</Badge>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>18 August, 2025 — PayPal (rohanjanean56@gmail.com)</div>
+                    <div>20 March 2026 — PayPal (rohanjanean56@gmail.com)</div>
                     <div className="flex items-center gap-3">
                       <span className="font-semibold text-gray-800">$150.00</span>
                       <Badge className="bg-blue-100 text-blue-800">Refunded to Balance</Badge>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>25 August, 2025 — TRC20 Wallet (TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz)</div>
+                    <div>28 March 2026 — TRC20 Wallet (TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz)</div>
                     <div className="flex items-center gap-3">
                       <span className="font-semibold text-gray-800">$100,841.00</span>
                       <Badge className="bg-yellow-100 text-yellow-800">Refunded — On Hold</Badge>
@@ -604,7 +616,7 @@ Generated on: ${new Date().toLocaleDateString()}
                     </div>
                     <div className="text-right text-sm text-gray-600">
                       <p>
-                        <strong>Date Issued:</strong> 27 August, 2025
+                        <strong>Date Issued:</strong> 28 March 2026
                       </p>
                       <p>
                         <strong>Email:</strong> support@exoclick.com
@@ -633,7 +645,7 @@ Generated on: ${new Date().toLocaleDateString()}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                       <span className="text-sm font-medium text-gray-700">Payment Date</span>
-                      <span className="text-sm font-semibold text-blue-800">25 August, 2025</span>
+                      <span className="text-sm font-semibold text-blue-800">28 March 2026</span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                       <span className="text-sm font-medium text-gray-700">Payment Method</span>
@@ -678,7 +690,7 @@ Generated on: ${new Date().toLocaleDateString()}
                     <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                       <span className="text-sm font-medium text-gray-700">Confirmation Date</span>
                       <span className="text-sm font-semibold text-green-800">
-                        {selectedPaymentEntry?.confirmed_date || "27 August, 2025"}
+                        {selectedPaymentEntry?.confirmed_date || "28 March 2026"}
                       </span>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">

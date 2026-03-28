@@ -312,7 +312,7 @@ export function DashboardContent() {
           <div className="space-y-6">
             <Card className="p-6 bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-gray-800">Hourly Breakdown - August 13, 2025 🏆 NEW RECORD!</h3>
+                <h3 className="text-xl font-bold text-gray-800">Hourly Breakdown - 28 March 2026 🎯</h3>
                 <div className="flex items-center space-x-2">
                   <BarChart2 className="h-6 w-6 text-purple-600" />
                   <span className="text-sm text-purple-600 font-medium">24 Hour View</span>
