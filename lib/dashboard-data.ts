@@ -2,7 +2,7 @@
 export const dashboardData = {
   metrics: {
     thisMonth: {
-      revenue: 5.8,
+      revenue: 142,
       impressions: 3800,
       clicks: 85,
       ctr: 2.24,
@@ -16,7 +16,7 @@ export const dashboardData = {
       ecpm: 0,
     },
     last6Months: {
-      revenue: 140.5,
+      revenue: 115392,
       impressions: 99700,
       clicks: 2338,
       ctr: 2.34,

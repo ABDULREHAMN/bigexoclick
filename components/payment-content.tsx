@@ -307,7 +307,7 @@ Generated on: ${new Date().toLocaleDateString()}
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
             {!config.dashboard.hide_next_withdraw_section && (
-              <StatsCard title="NEXT WITHDRAWAL" value="" />
+              <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}
           </div>
 
