@@ -32,14 +32,27 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 115342.0
-  const pendingBalance = 0.0
-  const totalEarnings = 115342.0
-  const totalPayments = 115342.0
+  const availableBalance = 0.0
+  const pendingBalance = 115392.0
+  const totalEarnings = 115392.0
+  const totalPayments = 0.0
   const thisMonthEarnings = 657.0 // This_Month: $657.00
   const nextWithdrawalDate = "29 March 2026"
 
-  const withdrawalHistory: WithdrawalDetails[] = []
+  const withdrawalHistory: WithdrawalDetails[] = [
+    {
+      id: "pending-scheduled-withdrawal",
+      date: "29 March 2026",
+      method: "USDT TRC20",
+      amount: "$115,392.00",
+      status: "pending",
+      details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
+      transactionId: "SCHEDULED-115392-MAR29",
+      isVerified: true,
+      note: "Scheduled withdrawal. Will be released within 10-15 days.",
+      confirmationTimestamp: "Pending release - 29 March 2026",
+    },
+  ]
 
   const paymentEntries = []
 
