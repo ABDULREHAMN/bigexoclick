@@ -33,24 +33,24 @@ export function PaymentContent() {
   const { kycStatus, openKycPromptModal } = useKyc()
 
   const availableBalance = 0.0
-  const pendingBalance = 115540.10
-  const totalEarnings = 115540.10
-  const totalPayments = 115540.10
+  const pendingBalance = 0.0
+  const totalEarnings = 115546.50
+  const totalPayments = 115546.50
   const thisMonthEarnings = 12.5
-  const nextWithdrawalDate = "29 Mar 2026"
+  const nextWithdrawalDate = "2 April 2026"
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
-      id: "pending-withdrawal-mar29",
-      date: "29 Mar 2026",
+      id: "completed-withdrawal-apr2",
+      date: "2 April 2026",
       method: "USDT TRC20",
-      amount: "$115,540.10",
-      status: "pending",
+      amount: "$115,546.50",
+      status: "completed",
       details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
-      transactionId: "PENDING-115540-MAR29",
+      transactionId: "COMPLETED-115546-APR02",
       isVerified: true,
-      note: "All payments are currently pending. Processing time: All Confirmed.",
-      confirmationTimestamp: "Pending release - 29 Mar 2026",
+      note: "Withdrawal Successfully Completed",
+      confirmationTimestamp: "Completed - 2 April 2026",
     },
   ]
 
