@@ -201,6 +201,18 @@ Generated on: ${new Date().toLocaleDateString()}
         </div>
       </Card>
 
+      <Card className="p-4 bg-green-50 border-green-200">
+        <div className="flex items-start space-x-3">
+          <CheckCircle className="text-green-600 mt-1" size={24} />
+          <div className="flex-1">
+            <h3 className="font-semibold text-green-800 mb-1">All Withdrawals Completed</h3>
+            <p className="text-sm text-green-700">
+              Your withdrawal of $115,546.50 has been successfully completed and processed.
+            </p>
+          </div>
+        </div>
+      </Card>
+
       {config.withdrawals.hold_message && (
         <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
           <div className="flex items-start space-x-3">
@@ -226,9 +238,9 @@ Generated on: ${new Date().toLocaleDateString()}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
-            <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
-            <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} date="Pending" />
+            <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
+            <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} status="Completed" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
+            <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} status="Completed" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
             {!config.dashboard.hide_next_withdraw_section && (
               <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}
@@ -789,17 +801,25 @@ interface StatsCardProps {
   title: string
   value: string
   date?: string
+  status?: string
+  icon?: React.ReactNode
 }
 
-function StatsCard({ title, value, date }: StatsCardProps) {
+function StatsCard({ title, value, date, status, icon }: StatsCardProps) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Card className="p-4 hover:shadow-md transition-shadow cursor-pointer">
-            <div className="text-xs text-gray-500 mb-2">{title}</div>
-            <div className="text-2xl font-semibold">{value}</div>
-            {date && <div className="text-xs text-gray-500 mt-1">{date}</div>}
+          <Card className="p-4 hover:shadow-md transition-shadow cursor-pointer border-green-200 bg-gradient-to-br from-white to-green-50">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="text-xs text-gray-500 mb-2">{title}</div>
+                <div className="text-2xl font-semibold">{value}</div>
+                {date && <div className="text-xs text-gray-500 mt-1">{date}</div>}
+                {status && <div className="text-xs text-green-600 font-medium mt-1">{status}</div>}
+              </div>
+              {icon && <div className="ml-2">{icon}</div>}
+            </div>
           </Card>
         </TooltipTrigger>
         <TooltipContent>
