@@ -32,25 +32,25 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 6.1
+  const availableBalance = 115540.1
   const pendingBalance = 115540.1
   const totalEarnings = 115540.1
   const totalPayments = 115540.1
-  const thisMonthEarnings = 657.0 // This_Month: $657.00
-  const nextWithdrawalDate = "29 March 2026"
+  const thisMonthEarnings = 6.1
+  const nextWithdrawalDate = "1 April 2026"
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
-      id: "pending-scheduled-withdrawal",
-      date: "29 March 2026",
+      id: "pending-withdrawal-april",
+      date: "1 April 2026",
       method: "USDT TRC20",
-      amount: "$115,392.00",
+      amount: "$115,540.10",
       status: "pending",
       details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
-      transactionId: "SCHEDULED-115392-MAR29",
+      transactionId: "PENDING-115540-APR01",
       isVerified: true,
-      note: "All payments are currently pending. Will be released within 10-15 days.",
-      confirmationTimestamp: "Pending release - 29 March 2026",
+      note: "Pending withdrawal. Will be released within 10-15 days.",
+      confirmationTimestamp: "Pending release - 1 April 2026",
     },
   ]
 
@@ -225,11 +225,10 @@ Generated on: ${new Date().toLocaleDateString()}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} />
             <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} date="Pending" />
-            <StatsCard title="SCHEDULED PAYMENT" value="Pending" date="Scheduled for 29 March 2026" />
             {!config.dashboard.hide_next_withdraw_section && (
               <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}

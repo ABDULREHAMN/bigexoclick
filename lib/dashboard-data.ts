@@ -9,7 +9,7 @@ export const dashboardData = {
       ecpm: 3.20,
     },
     lastMonth: {
-      revenue: 143.6,
+      revenue: 142,
       impressions: 3800,
       clicks: 85,
       ctr: 2.23,
