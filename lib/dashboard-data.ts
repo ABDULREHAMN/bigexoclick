@@ -2,11 +2,11 @@
 export const dashboardData = {
   metrics: {
     thisMonth: {
-      revenue: 6.1,
-      impressions: 3900,
-      clicks: 88,
-      ctr: 2.25,
-      ecpm: 3.20,
+      revenue: 12.5,
+      impressions: 4100,
+      clicks: 92,
+      ctr: 2.24,
+      ecpm: 3.30,
     },
     lastMonth: {
       revenue: 142,
@@ -16,7 +16,7 @@ export const dashboardData = {
       ecpm: 3.10,
     },
     last6Months: {
-      revenue: 115540.1,
+      revenue: 115546.50,
       impressions: 99700,
       clicks: 2338,
       ctr: 2.34,
@@ -57,6 +57,7 @@ export const dashboardData = {
     { date: "30 Mar 2026", domain: "example.com", impressions: 3800, clicks: 85, revenue: 5.8, ecpm: 1.53 },
     { date: "31 Mar 2026", domain: "example.com", impressions: 3800, clicks: 85, revenue: 5.8, ecpm: 1.53 },
     { date: "01 Apr 2026", domain: "example.com", impressions: 3900, clicks: 88, revenue: 6.1, ecpm: 1.56 },
+    { date: "02 Apr 2026", domain: "example.com", impressions: 4100, clicks: 92, revenue: 6.4, ecpm: 1.56 },
   ],
 
   chartData: {
