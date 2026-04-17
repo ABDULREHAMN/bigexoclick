@@ -34,7 +34,7 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 115546.50
+  const availableBalance = 0.0
   const pendingBalance = 115546.50
   const totalEarnings = 115546.50
   const totalPayments = 0.0
@@ -47,12 +47,12 @@ export function PaymentContent() {
       date: "2 April 2026",
       method: "USDT TRC20",
       amount: "$115,546.50",
-      status: "completed",
+      status: "pending",
       details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
-      transactionId: "COMPLETED-115546-APR02",
+      transactionId: "PENDING-115546-APR02",
       isVerified: true,
-      note: "Withdrawal Completed",
-      confirmationTimestamp: "Completed - 2 April 2026",
+      note: "Withdrawal Processing",
+      confirmationTimestamp: "Pending - 2 April 2026",
     },
   ]
 
@@ -191,9 +191,9 @@ Generated on: ${new Date().toLocaleDateString()}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
+            <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} status="Completed" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
-            <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} status="Completed" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
+            <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} status="Pending" icon={<AlertTriangle className="h-5 w-5 text-yellow-600" />} />
             {!config.dashboard.hide_next_withdraw_section && (
               <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}
