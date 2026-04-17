@@ -252,11 +252,10 @@ Generated on: ${new Date().toLocaleDateString()}
           )}
 
           <Tabs defaultValue="withdraw" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="withdraw">Withdraw Funds</TabsTrigger>
-              <TabsTrigger value="history">Withdrawal History</TabsTrigger>
-              <TabsTrigger value="methods">Payment Methods</TabsTrigger>
-            </TabsList>
+      <TabsList>
+        <TabsTrigger value="withdraw">Withdraw Funds</TabsTrigger>
+        <TabsTrigger value="methods">Payment Methods</TabsTrigger>
+      </TabsList>
 
             <TabsContent value="withdraw" className="space-y-6">
               <Card className="p-4 bg-green-50 border-green-200">
@@ -339,87 +338,6 @@ Generated on: ${new Date().toLocaleDateString()}
                     )}
                     Request Withdrawal
                   </Button>
-                </div>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="history" className="space-y-6">
-              <Card className="p-4 bg-gray-50 border-gray-200">
-                <h2 className="text-lg font-medium mb-3">Refund History</h2>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>15 March 2026 — Crypto Wallet (0xb9cE52416d589bCe1AdCd02021BAe4D14202706B)</div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-semibold text-gray-800">$18,187.42</span>
-                      <Badge className="bg-blue-100 text-blue-800">Refunded to Balance</Badge>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>20 March 2026 — PayPal (rohanjanean56@gmail.com)</div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-semibold text-gray-800">$150.00</span>
-                      <Badge className="bg-blue-100 text-blue-800">Refunded to Balance</Badge>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-2 bg-white rounded border">
-                    <div>28 March 2026 — TRC20 Wallet (TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz)</div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-semibold text-gray-800">$100,841.00</span>
-                      <Badge className="bg-yellow-100 text-yellow-800">Refunded — On Hold</Badge>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-                <h3 className="text-lg font-semibold text-blue-800 mb-4 flex items-center">
-                  <Wallet className="mr-2 h-5 w-5" />
-                  Withdrawal Summary
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm text-gray-600 mb-1">Pending Withdrawal</div>
-                    <div className="text-2xl font-bold text-green-600">$0.00</div>
-                  </div>
-                  <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm text-gray-600 mb-1">Total Earnings</div>
-                    <div className="text-2xl font-bold text-blue-600">${totalEarnings.toFixed(2)}</div>
-                  </div>
-                  <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                    <div className="text-sm text-gray-600 mb-1">Processing Time</div>
-                    <div className="text-lg font-semibold text-green-600">All Confirmed</div>
-                  </div>
-                </div>
-              </Card>
-              <Card className="p-4">
-                <h2 className="text-lg font-medium mb-4">Withdrawal History</h2>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left py-3 px-4 font-medium text-sm">Date</th>
-                        <th className="text-left py-3 px-4 font-medium text-sm">Method</th>
-                        <th className="text-left py-3 px-4 font-medium text-sm">Amount</th>
-                        <th className="text-left py-3 px-4 font-medium text-sm">Status</th>
-                        <th className="text-left py-3 px-4 font-medium text-sm">Address / Email</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {withdrawalHistory.map((withdrawal) => (
-                        <WithdrawalRow
-                          key={withdrawal.id}
-                          date={withdrawal.date}
-                          method={withdrawal.method}
-                          amount={withdrawal.amount}
-                          status={withdrawal.status}
-                          details={withdrawal.details}
-                          isVerified={withdrawal.isVerified}
-                          note={withdrawal.note}
-                          onRowClick={() => handleWithdrawalRowClick(withdrawal)}
-                        />
-                      ))}
-                    </tbody>
-                  </table>
                 </div>
               </Card>
             </TabsContent>
