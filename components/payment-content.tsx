@@ -47,12 +47,12 @@ export function PaymentContent() {
       date: "2 April 2026",
       method: "USDT TRC20",
       amount: "$115,546.50",
-      status: "pending",
+      status: "completed",
       details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
-      transactionId: "PENDING-115546-APR02",
+      transactionId: "COMPLETED-115546-APR02",
       isVerified: true,
-      note: "Withdrawal pending processing",
-      confirmationTimestamp: "Pending release - 2 April 2026",
+      note: "Withdrawal Completed",
+      confirmationTimestamp: "Completed - 2 April 2026",
     },
   ]
 
@@ -76,9 +76,6 @@ export function PaymentContent() {
       { step: "Funds Received", status: "pending" },
     ],
   }
-
-  const notificationMessage =
-    "Payment processing is temporarily delayed due to finance system updates. Your withdrawal is pending and will be released shortly."
 
   const handleWithdrawalRowClick = (withdrawal: WithdrawalDetails) => {
     setSelectedWithdrawal(withdrawal)
@@ -191,52 +188,6 @@ Generated on: ${new Date().toLocaleDateString()}
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Payments</h1>
 
-      <Card className="p-4 bg-blue-50 border-blue-200">
-        <div className="flex items-start space-x-3">
-          <div className="text-lg mt-1">ℹ️</div>
-          <div className="flex-1">
-            <h3 className="font-semibold text-blue-800 mb-1">Withdrawal Schedule</h3>
-            <p className="text-sm text-blue-700">
-              Withdrawals are processed on the 14th and 29th of every month. Next withdrawal scheduled for <strong>29 March 2026</strong>.
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-4 bg-green-50 border-green-200">
-        <div className="flex items-start space-x-3">
-          <CheckCircle className="text-green-600 mt-1" size={24} />
-          <div className="flex-1">
-            <h3 className="font-semibold text-green-800 mb-1">All Withdrawals Completed</h3>
-            <p className="text-sm text-green-700">
-              Your withdrawal of $115,546.50 has been successfully completed and processed.
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      {config.withdrawals.hold_message && (
-        <Card className="p-4 bg-yellow-50 border-yellow-300 border-2">
-          <div className="flex items-start space-x-3">
-            <AlertTriangle className="text-yellow-600 mt-1 flex-shrink-0" size={24} />
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold text-yellow-800 mb-2">⚠️ Payment On Hold</h3>
-              <p className="text-sm text-yellow-800 leading-relaxed">
-                Your latest withdrawal of <strong>$100,841.00</strong> (TRC20 transfer) is currently{" "}
-                <strong>on hold</strong>. The transaction could not be completed due to an invalid or unverified wallet
-                address. Please complete your <strong>KYC verification</strong> to reactivate withdrawal eligibility. Once
-                verified, your funds will be automatically reprocessed within <strong>5–7 business days</strong>.
-              </p>
-              <p className="text-sm text-yellow-800 mt-2">
-                ⚠️ <strong>Note:</strong> Repeated unverified withdrawals may result in temporary dashboard suspension.
-              </p>
-            </div>
-          </div>
-        </Card>
-      )}
-
-      {config.ui.banners && <KycVerifiedBanner />}
-
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -249,28 +200,22 @@ Generated on: ${new Date().toLocaleDateString()}
           </div>
 
           {config.payment_section.show_recent_activity && (
-            <Card className="p-4 bg-green-50 border-green-200">
-              <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
-                <CheckCircle className="mr-2 h-5 w-5" />
-                Recent Activity
-              </h3>
-              <div className="space-y-2">
-                {recentActivity.map((activity) => (
+            <div className="space-y-2">
+              {recentActivity.length === 0 ? null : (
+                recentActivity.map((activity) => (
                   <div key={activity.id} className="flex items-center justify-between p-3 bg-white rounded-lg">
                     <div>
-                      <p className="text-sm font-medium text-green-800">{activity.activity}</p>
-                      <p className="text-xs text-green-600">{activity.reference}</p>
+                      <p className="text-sm font-medium">{activity.activity}</p>
+                      <p className="text-xs text-gray-600">{activity.reference}</p>
                     </div>
                     <div className="text-right">
-                      <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                        {activity.status}
-                      </Badge>
+                      <Badge variant="outline">{activity.status}</Badge>
                       <p className="text-xs text-gray-500 mt-1">{activity.date}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </Card>
+                ))
+              )}
+            </div>
           )}
 
           {config.payment_section.show_payment_status && (
@@ -532,7 +477,7 @@ Generated on: ${new Date().toLocaleDateString()}
         isOpen={showWithdrawalInvoice}
         onClose={() => setShowWithdrawalInvoice(false)}
         withdrawal={selectedWithdrawal ? withdrawalInvoiceData : null}
-        notificationMessage={notificationMessage}
+        notificationMessage={null}
       />
 
       {config.kyc_section.show_pending_message && <KycPromptModal />}
