@@ -38,7 +38,7 @@ export function PaymentContent() {
   const pendingBalance = 115546.50
   const totalEarnings = 115546.50
   const totalPayments = 0.0
-  const thisMonthEarnings = 12.5
+  const thisMonthEarnings = 102.4
   const nextWithdrawalDate = "29 April 2026"
 
   const withdrawalHistory: WithdrawalDetails[] = [
