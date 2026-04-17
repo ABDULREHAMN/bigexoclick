@@ -16,7 +16,6 @@ import { KycPromptModal } from "./kyc-prompt-modal"
 import { KycVerifiedBanner } from "./kyc-verified-banner"
 import { KycInformationCard } from "./kyc-information-card"
 import { WithdrawalRow } from "./withdrawal-row"
-import { PaymentMethodCard } from "./payment-method-card"
 import { WithdrawalDetailsModal, type WithdrawalDetails } from "./withdrawal-details-modal"
 import { WithdrawalInvoiceModal, type WithdrawalInvoiceData } from "./withdrawal-invoice-modal"
 import { config } from "@/lib/config"
@@ -254,7 +253,7 @@ Generated on: ${new Date().toLocaleDateString()}
           <Tabs defaultValue="withdraw" className="space-y-6">
       <TabsList>
         <TabsTrigger value="withdraw">Withdraw Funds</TabsTrigger>
-        <TabsTrigger value="methods">Payment Methods</TabsTrigger>
+        <TabsTrigger value="history">Withdrawal History</TabsTrigger>
       </TabsList>
 
             <TabsContent value="withdraw" className="space-y-6">
@@ -342,26 +341,38 @@ Generated on: ${new Date().toLocaleDateString()}
               </Card>
             </TabsContent>
 
-            <TabsContent value="methods" className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-lg font-medium">Payment Methods</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <PaymentMethodCard
-                    type="USDT (TRC20)"
-                    details="TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz"
-                    network="TRC20 - TRON Network"
-                    limit="Unlimited"
-                    isDefault={true}
-                    isVerified={true}
-                  />
-                  <Card className="p-4 border-dashed flex items-center justify-center h-40">
-                    <Button variant="outline" className="flex items-center bg-transparent">
-                      <Wallet className="mr-2" size={16} />
-                      Add Payment Method
-                    </Button>
-                  </Card>
+            <TabsContent value="history" className="space-y-6">
+              <Card className="p-4">
+                <h2 className="text-lg font-medium mb-4">Withdrawal History</h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-3 px-4 font-medium text-sm">Date</th>
+                        <th className="text-left py-3 px-4 font-medium text-sm">Method</th>
+                        <th className="text-left py-3 px-4 font-medium text-sm">Amount</th>
+                        <th className="text-left py-3 px-4 font-medium text-sm">Status</th>
+                        <th className="text-left py-3 px-4 font-medium text-sm">Address / Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {withdrawalHistory.map((withdrawal) => (
+                        <WithdrawalRow
+                          key={withdrawal.id}
+                          date={withdrawal.date}
+                          method={withdrawal.method}
+                          amount={withdrawal.amount}
+                          status={withdrawal.status}
+                          details={withdrawal.details}
+                          isVerified={withdrawal.isVerified}
+                          note={withdrawal.note}
+                          onRowClick={() => handleWithdrawalRowClick(withdrawal)}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              </div>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
