@@ -18,6 +18,7 @@ import { KycInformationCard } from "./kyc-information-card"
 import { WithdrawalRow } from "./withdrawal-row"
 import { PaymentMethodCard } from "./payment-method-card"
 import { WithdrawalDetailsModal, type WithdrawalDetails } from "./withdrawal-details-modal"
+import { WithdrawalInvoiceModal, type WithdrawalInvoiceData } from "./withdrawal-invoice-modal"
 import { config } from "@/lib/config"
 
 export function PaymentContent() {
@@ -28,31 +29,61 @@ export function PaymentContent() {
   const [errorMessage, setErrorMessage] = useState("")
   const [selectedWithdrawal, setSelectedWithdrawal] = useState<WithdrawalDetails | null>(null)
   const [showWithdrawalDetails, setShowWithdrawalDetails] = useState(false)
+  const [showWithdrawalInvoice, setShowWithdrawalInvoice] = useState(false)
   const [showBankTransferConfirmation, setShowBankTransferConfirmation] = useState(false)
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 0.0
-  const pendingBalance = 0.0
+  const availableBalance = 115546.50
+  const pendingBalance = 115546.50
   const totalEarnings = 115546.50
-  const totalPayments = 115546.50
+  const totalPayments = 0.0
   const thisMonthEarnings = 12.5
-  const nextWithdrawalDate = "2 April 2026"
+  const nextWithdrawalDate = "29 April 2026"
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
-      id: "completed-withdrawal-apr2",
+      id: "wdr-apr-15-1264",
       date: "2 April 2026",
       method: "USDT TRC20",
       amount: "$115,546.50",
-      status: "completed",
+      status: "pending",
       details: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
-      transactionId: "COMPLETED-115546-APR02",
+      transactionId: "PENDING-115546-APR02",
       isVerified: true,
-      note: "Withdrawal Successfully Completed",
-      confirmationTimestamp: "Completed - 2 April 2026",
+      note: "Withdrawal pending processing",
+      confirmationTimestamp: "Pending release - 2 April 2026",
     },
   ]
+
+  const withdrawalInvoiceData: WithdrawalInvoiceData = {
+    id: "wdr-apr-15-1264",
+    date: "Apr 2, 2026",
+    amount: 115546.50,
+    status: "pending",
+    userName: "Lustify Sex Official",
+    userEmail: "lustifysex.official@gmail.com",
+    method: "Crypto (TRC20)",
+    kycStatus: "Verified",
+    walletAddress: "TEVQ9zRdLaBX3ohHU81Xh7hDyCdUg98aKz",
+    processingTime: "8–10 business days",
+    nextWithdrawalDate: "Apr 29, 2026",
+    timeline: [
+      { step: "Withdrawal Requested", status: "completed" },
+      { step: "Under Review", status: "completed" },
+      { step: "Sent to Wallet", status: "completed" },
+      { step: "Processing", status: "completed" },
+      { step: "Funds Received", status: "pending" },
+    ],
+  }
+
+  const notificationMessage =
+    "Payment processing is temporarily delayed due to finance system updates. Your withdrawal is pending and will be released shortly."
+
+  const handleWithdrawalRowClick = (withdrawal: WithdrawalDetails) => {
+    setSelectedWithdrawal(withdrawal)
+    setShowWithdrawalInvoice(true)
+  }
 
   const paymentEntries = []
 
@@ -86,35 +117,6 @@ export function PaymentContent() {
       return
     }
     alert("Withdrawal request submitted (simulated)!")
-  }
-
-  const handleWithdrawalRowClick = (withdrawalId: string) => {
-  const bankTransferIds = [""]
-  const cryptoFailedIds = [""]
-
-    if (bankTransferIds.includes(withdrawalId)) {
-      const paymentEntry = paymentEntries.find((entry) => entry.id === withdrawalId)
-      if (paymentEntry) {
-        setSelectedPaymentEntry(paymentEntry)
-        setShowBankTransferConfirmation(true)
-      }
-      return
-    }
-
-    if (cryptoFailedIds.includes(withdrawalId)) {
-      const paymentEntry = paymentEntries.find((entry) => entry.id === withdrawalId)
-      if (paymentEntry) {
-        setSelectedPaymentEntry(paymentEntry)
-        setShowBankTransferConfirmation(true)
-      }
-      return
-    }
-
-    const withdrawal = withdrawalHistory.find((w) => w.id === withdrawalId)
-    if (withdrawal) {
-      setSelectedWithdrawal(withdrawal)
-      setShowWithdrawalDetails(true)
-    }
   }
 
   const handleDownloadPDF = (paymentEntry: any) => {
@@ -468,7 +470,7 @@ Generated on: ${new Date().toLocaleDateString()}
                           details={withdrawal.details}
                           isVerified={withdrawal.isVerified}
                           note={withdrawal.note}
-                          onRowClick={() => handleWithdrawalRowClick(withdrawal.id)}
+                          onRowClick={() => handleWithdrawalRowClick(withdrawal)}
                         />
                       ))}
                     </tbody>
@@ -524,6 +526,13 @@ Generated on: ${new Date().toLocaleDateString()}
         isOpen={showWithdrawalDetails}
         onClose={() => setShowWithdrawalDetails(false)}
         withdrawal={selectedWithdrawal}
+      />
+
+      <WithdrawalInvoiceModal
+        isOpen={showWithdrawalInvoice}
+        onClose={() => setShowWithdrawalInvoice(false)}
+        withdrawal={selectedWithdrawal ? withdrawalInvoiceData : null}
+        notificationMessage={notificationMessage}
       />
 
       {config.kyc_section.show_pending_message && <KycPromptModal />}
