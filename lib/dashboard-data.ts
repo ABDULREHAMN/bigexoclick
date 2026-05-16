@@ -3,10 +3,10 @@ export const dashboardData = {
   metrics: {
     thisMonth: {
       revenue: 1.0,
-      impressions: 140,
+      impressions: 260,
       clicks: 5,
-      ctr: 3.57,
-      ecpm: 24.8,
+      ctr: 0.47,
+      ecpm: 40.88,
     },
     lastMonth: {
       revenue: 142,
@@ -25,7 +25,7 @@ export const dashboardData = {
   },
 
   recentActivity: [
-    { date: "16 May 2026", domain: "example.com", impressions: 140, clicks: 5, revenue: 1.0, ecpm: 24.8 },
+    { date: "16 May 2026", domain: "example.com", impressions: 260, clicks: 5, revenue: 1.0, ecpm: 40.88 },
     { date: "15 May 2026", domain: "example.com", impressions: 120, clicks: 3, revenue: 0.8, ecpm: 22.0 },
     { date: "14 May 2026", domain: "example.com", impressions: 110, clicks: 2, revenue: 0.6, ecpm: 20.0 },
     { date: "13 May 2026", domain: "example.com", impressions: 100, clicks: 1, revenue: 0.5, ecpm: 19.5 },
@@ -93,7 +93,7 @@ export const dashboardData = {
       { date: "13 May", impressions: 100, clicks: 1, revenue: 0.5 },
       { date: "14 May", impressions: 110, clicks: 2, revenue: 0.6 },
       { date: "15 May", impressions: 120, clicks: 3, revenue: 0.8 },
-      { date: "16 May", impressions: 140, clicks: 5, revenue: 1.0 },
+      { date: "16 May", impressions: 260, clicks: 5, revenue: 1.0 },
     ],
     last30Days: [
       { date: "16 Apr", impressions: 100, clicks: 1, revenue: 0.5 },
@@ -125,7 +125,7 @@ export const dashboardData = {
       { date: "12 May", impressions: 140, clicks: 5, revenue: 1.0 },
       { date: "13 May", impressions: 100, clicks: 1, revenue: 0.5 },
       { date: "14 May", impressions: 110, clicks: 2, revenue: 0.6 },
-      { date: "15 May", impressions: 120, clicks: 3, revenue: 0.8 },
+      { date: "16 May", impressions: 260, clicks: 5, revenue: 1.0 },
     ],
     last6Months: [
       { date: "Mar 2026", impressions: 99700, clicks: 2338, revenue: 137.8 },
@@ -144,7 +144,7 @@ export const dashboardData = {
           { date: "13 May 2026", impressions: "100", clicks: "1", ctr: "1.00%", revenue: "$0.50", ecpm: "$19.50" },
           { date: "14 May 2026", impressions: "110", clicks: "2", ctr: "1.82%", revenue: "$0.60", ecpm: "$20.00" },
           { date: "15 May 2026", impressions: "120", clicks: "3", ctr: "2.50%", revenue: "$0.80", ecpm: "$22.00" },
-          { date: "16 May 2026", impressions: "140", clicks: "5", ctr: "3.57%", revenue: "$1.00", ecpm: "$24.80" },
+          { date: "16 May 2026", impressions: "260", clicks: "5", ctr: "0.47%", revenue: "$1.00", ecpm: "$40.88" },
         ],
       },
     },
@@ -181,6 +181,7 @@ export const dashboardData = {
           { date: "13 May 2026", impressions: "100", clicks: "1", ctr: "1.00%", revenue: "$0.50", ecpm: "$19.50" },
           { date: "14 May 2026", impressions: "110", clicks: "2", ctr: "1.82%", revenue: "$0.60", ecpm: "$20.00" },
           { date: "15 May 2026", impressions: "120", clicks: "3", ctr: "2.50%", revenue: "$0.80", ecpm: "$22.00" },
+          { date: "16 May 2026", impressions: "260", clicks: "5", ctr: "0.47%", revenue: "$1.00", ecpm: "$40.88" },
         ],
       },
     },
