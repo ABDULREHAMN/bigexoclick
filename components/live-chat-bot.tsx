@@ -20,6 +20,25 @@ Please contact us again after 2 days (Monday).
 
 Thank you for your patience.`
 
+const SUPPORT_AGENT_MESSAGE = `Hello,
+
+Thank you for contacting the Finance & Payments Team.
+
+We are currently reviewing your withdrawal request and verifying all payment details, account status, and transaction records.
+
+Please allow approximately 4–7 hours for our team to complete the verification process. After the review is completed, we will provide a detailed update explaining the current payment status and the estimated release time.
+
+To help us investigate, please confirm the following:
+
+1. Is your withdrawal method still active and accessible?
+2. Have you recently changed your wallet address or payment method?
+3. Are there any pending verification requests on your account?
+4. Have you received any payment-related notifications recently?
+
+Our finance team is checking all records. Once the review is completed, we will update you with the reason for the delay and the expected payment release schedule.
+
+Thank you for your patience.`
+
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -29,13 +48,19 @@ export default function LiveChatBot() {
   const openChat = () => {
     setIsOpen(true)
     if (!hasShownAutoReply) {
-      // Show auto-reply immediately when chat opens
+      // Show support agent message followed by auto-reply
       setMessages([
         {
           id: Date.now(),
           sender: "bot",
-          content: AUTO_REPLY_MESSAGE,
+          content: SUPPORT_AGENT_MESSAGE,
           timestamp: new Date(),
+        },
+        {
+          id: Date.now() + 1,
+          sender: "bot",
+          content: AUTO_REPLY_MESSAGE,
+          timestamp: new Date(Date.now() + 1000),
         },
       ])
       setHasShownAutoReply(true)
