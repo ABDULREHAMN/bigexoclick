@@ -41,66 +41,64 @@ const FAQ_DATA: FAQItem[] = [
   { q: "When will I get the final update?", a: "A detailed update will be provided once all checks are completed." },
 ]
 
-const AUTO_REPLY_MESSAGE = `Live Chat is currently closed.
+const PAYMENT_KEYWORDS = ["payment", "withdrawal", "pending", "review", "hold", "finance", "balance"]
 
-Our support team is unavailable at the moment.
-Please contact us again after 2 days (Monday).
+const PAYMENT_RESPONSE = `Thank you for contacting Finance Support.
 
-Thank you for your patience.`
+We have received your request and are currently reviewing your account, payment details, and withdrawal records.
 
-const SUPPORT_AGENT_MESSAGE = `Hello,
+Our team is checking all information and will provide an update as soon as the review is completed.
 
-Thank you for contacting the Finance & Payments Team.
+Estimated review time: 4–7 hours.
 
-We are currently reviewing your withdrawal request and verifying all payment details, account status, and transaction records.
-
-Please allow approximately 4–7 hours for our team to complete the verification process. After the review is completed, we will provide a detailed update explaining the current payment status and the estimated release time.
-
-To help us investigate, please confirm the following:
-
-1. Is your withdrawal method still active and accessible?
-2. Have you recently changed your wallet address or payment method?
-3. Are there any pending verification requests on your account?
-4. Have you received any payment-related notifications recently?
-
-Our finance team is checking all records. Once the review is completed, we will update you with the reason for the delay and the expected payment release schedule.
-
-Thank you for your patience.`
+Please wait while we verify the details.`
 
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
-  const [hasShownAutoReply, setHasShownAutoReply] = useState(false)
   const [showFAQ, setShowFAQ] = useState(false)
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
+  const [userInput, setUserInput] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const openChat = () => {
-    setIsOpen(true)
-    if (!hasShownAutoReply) {
-      // Show support agent message followed by auto-reply
-      setMessages([
-        {
-          id: Date.now(),
-          sender: "bot",
-          content: SUPPORT_AGENT_MESSAGE,
-          timestamp: new Date(),
-        },
-        {
-          id: Date.now() + 1,
-          sender: "bot",
-          content: AUTO_REPLY_MESSAGE,
-          timestamp: new Date(Date.now() + 1000),
-        },
-      ])
-      setHasShownAutoReply(true)
-    }
+  const containsPaymentKeyword = (text: string): boolean => {
+    return PAYMENT_KEYWORDS.some((keyword) => text.toLowerCase().includes(keyword))
   }
 
-  const closeChat = () => {
-    setIsOpen(false)
-    setMessages([])
-    setHasShownAutoReply(false)
+  const handleSendMessage = () => {
+    if (!userInput.trim()) return
+
+    // Add user message
+    const userMessage: Message = {
+      id: Date.now(),
+      sender: "user",
+      content: userInput,
+      timestamp: new Date(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+
+    // Check if message contains payment keywords and send response
+    if (containsPaymentKeyword(userInput)) {
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        sender: "bot",
+        content: PAYMENT_RESPONSE,
+        timestamp: new Date(Date.now() + 500),
+      }
+      setTimeout(() => {
+        setMessages((prev) => [...prev, botMessage])
+      }, 500)
+    }
+
+    setUserInput("")
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSendMessage()
+    }
   }
 
   return (
@@ -123,10 +121,10 @@ export default function LiveChatBot() {
                 <MessageCircle className="h-4 w-4 text-blue-600" />
               </div>
               <div>
-                <CardTitle className="text-sm font-medium">Support Team</CardTitle>
+                <CardTitle className="text-sm font-medium">Finance Support Team</CardTitle>
                 <div className="flex items-center space-x-1 text-xs">
-                  <div className="w-2 h-2 bg-red-400 rounded-full"></div>
-                  <span>Offline</span>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Online</span>
                 </div>
               </div>
             </div>
@@ -140,13 +138,17 @@ export default function LiveChatBot() {
             </Button>
           </CardHeader>
 
-          <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
+          <CardContent className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
             {messages.length > 0 ? (
               messages.map((message) => (
-                <div key={message.id} className="w-full">
-                  <div className="max-w-[100%] rounded-lg px-4 py-3 text-sm bg-gray-100 text-gray-900">
+                <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+                  <div
+                    className={`max-w-[80%] rounded-lg px-4 py-3 text-sm ${
+                      message.sender === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
+                    }`}
+                  >
                     <div className="whitespace-pre-wrap">{message.content}</div>
-                    <div className="text-xs text-gray-500 mt-2">
+                    <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
                       {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </div>
                   </div>
@@ -154,10 +156,11 @@ export default function LiveChatBot() {
               ))
             ) : (
               <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
-                <div className="text-sm font-medium text-gray-700">Frequently Asked Questions</div>
+                <div className="text-sm font-medium text-gray-700">Welcome to Finance Support</div>
+                <div className="text-xs text-gray-500">Ask us about payments, withdrawals, and account reviews</div>
               </div>
             )}
-            
+
             {showFAQ && (
               <div className="space-y-2 mt-4">
                 {FAQ_DATA.map((faq, index) => (
@@ -181,11 +184,28 @@ export default function LiveChatBot() {
                 ))}
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </CardContent>
 
           <div className="p-4 border-t bg-gray-50 rounded-b-lg space-y-2">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-1 px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <Button
+                onClick={handleSendMessage}
+                size="sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Send
+              </Button>
+            </div>
             <Button
               onClick={() => setShowFAQ(!showFAQ)}
               variant="outline"
@@ -194,8 +214,8 @@ export default function LiveChatBot() {
             >
               {showFAQ ? "Hide" : "Show"} FAQ
             </Button>
-            <Badge variant="secondary" className="text-xs bg-gray-200 text-gray-800 w-full text-center">
-              Offline Mode - Auto-reply enabled
+            <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 w-full text-center">
+              Online - Finance Support Team
             </Badge>
           </div>
         </Card>
