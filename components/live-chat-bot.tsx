@@ -4,7 +4,7 @@ import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MessageCircle, X } from "lucide-react"
+import { MessageCircle, X, ChevronDown } from "lucide-react"
 
 interface Message {
   id: number
@@ -12,6 +12,34 @@ interface Message {
   content: string
   timestamp: Date
 }
+
+interface FAQItem {
+  q: string
+  a: string
+}
+
+const FAQ_DATA: FAQItem[] = [
+  { q: "Why is my payment on hold?", a: "Your payment is currently under finance review for verification and security checks." },
+  { q: "How long does the review take?", a: "Most reviews are completed within 4–7 hours, but some cases may require additional verification." },
+  { q: "Why was my withdrawal delayed?", a: "The withdrawal is being reviewed to ensure account and payment details are correct." },
+  { q: "Is my payment safe?", a: "Yes, your payment remains secure while the review is in progress." },
+  { q: "Can I cancel my withdrawal?", a: "Yes, if processing has not been completed yet." },
+  { q: "Why is my withdrawal marked as pending?", a: "Pending status means the payment is awaiting final approval." },
+  { q: "Do I need to verify my account?", a: "Additional verification may be required depending on account activity." },
+  { q: "Has my payment been sent?", a: "Please wait for the review result. Once approved, the status will be updated." },
+  { q: "Can I change my wallet address?", a: "Wallet changes may require a new verification review." },
+  { q: "Why is the processing taking longer?", a: "Some transactions require manual finance review." },
+  { q: "Will I receive a notification?", a: "Yes, you will receive an update once the review is completed." },
+  { q: "What causes payment holds?", a: "Verification checks, account updates, or payment security reviews." },
+  { q: "Can I submit another withdrawal?", a: "It is recommended to wait until the current review is completed." },
+  { q: "Why is my balance not released?", a: "Your balance is currently being checked by the finance team." },
+  { q: "What happens after approval?", a: "The withdrawal will be processed and released." },
+  { q: "Can support speed up the review?", a: "Support can review your case but cannot bypass verification requirements." },
+  { q: "Is there an issue with my TRC20 address?", a: "The finance team is verifying all payment details." },
+  { q: "How do I know if my withdrawal is approved?", a: "The withdrawal status will change from Pending to Approved or Completed." },
+  { q: "Why was my withdrawal selected for review?", a: "Random security and compliance checks may trigger a review." },
+  { q: "When will I get the final update?", a: "A detailed update will be provided once all checks are completed." },
+]
 
 const AUTO_REPLY_MESSAGE = `Live Chat is currently closed.
 
@@ -43,6 +71,8 @@ export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [hasShownAutoReply, setHasShownAutoReply] = useState(false)
+  const [showFAQ, setShowFAQ] = useState(false)
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const openChat = () => {
@@ -110,22 +140,61 @@ export default function LiveChatBot() {
             </Button>
           </CardHeader>
 
-          <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col justify-center items-center">
-            {messages.map((message) => (
-              <div key={message.id} className="w-full">
-                <div className="max-w-[100%] rounded-lg px-4 py-3 text-sm bg-gray-100 text-gray-900">
-                  <div className="whitespace-pre-wrap">{message.content}</div>
-                  <div className="text-xs text-gray-500 mt-2">
-                    {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+          <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
+            {messages.length > 0 ? (
+              messages.map((message) => (
+                <div key={message.id} className="w-full">
+                  <div className="max-w-[100%] rounded-lg px-4 py-3 text-sm bg-gray-100 text-gray-900">
+                    <div className="whitespace-pre-wrap">{message.content}</div>
+                    <div className="text-xs text-gray-500 mt-2">
+                      {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
+                <div className="text-sm font-medium text-gray-700">Frequently Asked Questions</div>
               </div>
-            ))}
+            )}
+            
+            {showFAQ && (
+              <div className="space-y-2 mt-4">
+                {FAQ_DATA.map((faq, index) => (
+                  <div key={index} className="border rounded-lg overflow-hidden bg-white">
+                    <button
+                      onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                      className="w-full text-left px-3 py-2 hover:bg-blue-50 flex items-center justify-between text-xs font-medium text-gray-800"
+                    >
+                      <span className="line-clamp-1">{faq.q}</span>
+                      <ChevronDown
+                        size={16}
+                        className={`flex-shrink-0 ml-2 transition-transform ${expandedFAQ === index ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {expandedFAQ === index && (
+                      <div className="px-3 py-2 bg-gray-50 border-t text-xs text-gray-700 leading-relaxed">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            
             <div ref={messagesEndRef} />
           </CardContent>
 
-          <div className="p-4 border-t bg-gray-50 rounded-b-lg">
-            <Badge variant="secondary" className="text-xs bg-gray-200 text-gray-800">
+          <div className="p-4 border-t bg-gray-50 rounded-b-lg space-y-2">
+            <Button
+              onClick={() => setShowFAQ(!showFAQ)}
+              variant="outline"
+              size="sm"
+              className="w-full text-xs"
+            >
+              {showFAQ ? "Hide" : "Show"} FAQ
+            </Button>
+            <Badge variant="secondary" className="text-xs bg-gray-200 text-gray-800 w-full text-center">
               Offline Mode - Auto-reply enabled
             </Badge>
           </div>
