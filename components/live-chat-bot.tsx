@@ -105,7 +105,7 @@ export default function LiveChatBot() {
     <>
       {/* Chat Button */}
       <Button
-        onClick={openChat}
+        onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg z-50"
         size="icon"
       >
@@ -131,7 +131,7 @@ export default function LiveChatBot() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={closeChat}
+              onClick={() => setIsOpen(false)}
               className="text-white hover:bg-blue-700 h-8 w-8"
             >
               <X className="h-4 w-4" />
