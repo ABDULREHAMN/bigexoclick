@@ -56,7 +56,6 @@ export const dashboardData = {
     { date: "18 Apr 2026", domain: "example.com", impressions: 110, clicks: 2, revenue: 0.6, ecpm: 16.0 },
     { date: "17 Apr 2026", domain: "example.com", impressions: 105, clicks: 2, revenue: 0.6, ecpm: 15.5 },
     { date: "16 Apr 2026", domain: "example.com", impressions: 100, clicks: 1, revenue: 0.5, ecpm: 15.0 },
-  ]
     { date: "01 Apr 2026", domain: "example.com", impressions: 1100, clicks: 11, revenue: 5.2, ecpm: 16.2 },
     { date: "02 Apr 2026", domain: "example.com", impressions: 1200, clicks: 12, revenue: 5.6, ecpm: 17.1 },
     { date: "03 Apr 2026", domain: "example.com", impressions: 1300, clicks: 13, revenue: 6.1, ecpm: 18.0 },
