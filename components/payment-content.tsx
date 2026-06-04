@@ -33,14 +33,26 @@ export function PaymentContent() {
   const [selectedPaymentEntry, setSelectedPaymentEntry] = useState<any>(null)
   const { kycStatus, openKycPromptModal } = useKyc()
 
-  const availableBalance = 115720.30
-  const pendingBalance = 0.0
+  const availableBalance = 0.0
+  const pendingBalance = 115720.30
   const totalEarnings = 115720.30
   const totalPayments = 115720.30
   const thisMonthEarnings = 102.4
   const nextWithdrawalDate = "29 April 2026"
 
   const withdrawalHistory: WithdrawalDetails[] = [
+    {
+      id: "wdr-may-16-2026",
+      date: "16 May 2026",
+      method: "Crypto (TRC20)",
+      amount: "$115,720.30",
+      status: "pending",
+      details: "TZBnF1YuMZZxRFCtQrdUk695dh8cXdSMm1",
+      transactionId: "PENDING-115720-MAY16",
+      isVerified: true,
+      note: "Withdrawal Processing — 20–22 Business Days",
+      confirmationTimestamp: "Pending - 16 May 2026",
+    },
     {
       id: "wdr-apr-15-1264",
       date: "2 April 2026",
