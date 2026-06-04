@@ -42,6 +42,18 @@ export function PaymentContent() {
 
   const withdrawalHistory: WithdrawalDetails[] = [
     {
+      id: "wdr-jun-04-2026",
+      date: "4 Jun 2026",
+      method: "Crypto (TRC20)",
+      amount: "$115,720.30",
+      status: "pending",
+      details: "TZBnF1YuMZZxRFCtQrdUk695dh8cXdSMm1",
+      transactionId: "PENDING-115720-JUN04",
+      isVerified: true,
+      note: "20–22 Business Days",
+      confirmationTimestamp: "Pending - 4 Jun 2026",
+    },
+    {
       id: "wdr-may-16-2026",
       date: "16 May 2026",
       method: "Crypto (TRC20)",
@@ -205,12 +217,19 @@ Generated on: ${new Date().toLocaleDateString()}
             <StatsCard title="AVAILABLE BALANCE" value={`$${availableBalance.toFixed(2)}`} status="Available" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
             <StatsCard title="TOTAL PAYMENTS" value={`$${totalPayments.toFixed(2)}`} status="Completed" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
             {pendingBalance > 0 && (
-              <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} status="Cancelled" icon={<AlertTriangle className="h-5 w-5 text-red-600" />} />
+              <StatsCard title="PENDING PAYMENTS" value={`$${pendingBalance.toFixed(2)}`} status="Pending" icon={<AlertTriangle className="h-5 w-5 text-yellow-600" />} />
             )}
             {!config.dashboard.hide_next_withdraw_section && (
               <StatsCard title="NEXT WITHDRAWAL" value={nextWithdrawalDate} />
             )}
           </div>
+
+          <Alert className="bg-yellow-50 border-yellow-200">
+            <AlertTriangle className="h-4 w-4 text-yellow-600" />
+            <AlertDescription className="text-yellow-800">
+              <strong>Withdrawal Submitted:</strong> A new withdrawal request has been submitted successfully. Estimated release time: 20–22 business days.
+            </AlertDescription>
+          </Alert>
 
           {config.payment_section.show_recent_activity && (
             <div className="space-y-2">
