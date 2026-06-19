@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ChevronDown, Globe, Search, User, Settings, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -24,7 +24,11 @@ interface TopNavbarProps {
 export function TopNavbar({ onNavigate }: TopNavbarProps) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("dashboard")
-  const username = getUsername()
+  const [username, setUsername] = useState<string | null>(null)
+
+  useEffect(() => {
+    setUsername(getUsername())
+  }, [])
 
   const tabs = [
     { id: "dashboard", label: "Dashboard" },
