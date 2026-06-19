@@ -419,7 +419,9 @@ Generated on: ${new Date().toLocaleDateString()}
                 {config.support_section.show_email && <div className="mt-2">Email: support@exoclick.com</div>}
                 {config.support_section.show_website && <div>Website: www.exoclick.com</div>}
                 {config.support_section.show_response_time && (
-                  <div className="text-gray-600 mt-1">Response time: 24–48 business hours</div>
+                  <div className="mt-2">
+                    <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                  </div>
                 )}
               </div>
             </Card>
