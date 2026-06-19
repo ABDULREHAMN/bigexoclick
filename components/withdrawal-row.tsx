@@ -45,7 +45,7 @@ export function WithdrawalRow({
     pending: {
       icon: Clock,
       color: "text-yellow-500 bg-yellow-50",
-      label: "Pending — 48–72 hours",
+      label: "Pending",
     },
     cancelled: {
       icon: X,
@@ -60,7 +60,7 @@ export function WithdrawalRow({
     scheduled: {
       icon: Clock,
       color: "text-yellow-500 bg-yellow-50",
-      label: "Pending — 48–72 hours",
+      label: "Scheduled",
     },
     failed: {
       icon: AlertTriangle,
