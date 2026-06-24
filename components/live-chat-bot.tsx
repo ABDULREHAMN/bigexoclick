@@ -6,13 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, X, ChevronDown } from "lucide-react"
 
-interface Message {
-  id: number
-  sender: "bot" | "user"
-  content: string
-  timestamp: Date
-}
-
 interface FAQItem {
   q: string
   a: string
@@ -44,68 +37,16 @@ const FAQ_DATA: FAQItem[] = [
   { q: "When will I get a final answer?", a: "A complete update will be provided after review." },
 ]
 
-const PAYMENT_KEYWORDS = ["payment", "withdrawal", "pending", "review", "hold", "finance", "balance", "kyc", "verification"]
 
-const PAYMENT_RESPONSE = `Thank you for contacting support.
-
-We have received all of your questions and requests.
-
-All information will be reviewed carefully.
-
-After the review process is completed, we will provide you with a detailed update regarding your request.
-
-Thank you for your patience.
-
-${AGENT_NAME}
-${AGENT_ROLE}`
 
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([])
-  const [showFAQ, setShowFAQ] = useState(false)
+  const [showFAQ, setShowFAQ] = useState(true)
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
   const [userInput, setUserInput] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const containsPaymentKeyword = (text: string): boolean => {
-    return PAYMENT_KEYWORDS.some((keyword) => text.toLowerCase().includes(keyword))
-  }
 
-  const handleSendMessage = () => {
-    if (!userInput.trim()) return
-
-    // Add user message
-    const userMessage: Message = {
-      id: Date.now(),
-      sender: "user",
-      content: userInput,
-      timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-
-    // Check if message contains payment keywords and send response
-    if (containsPaymentKeyword(userInput)) {
-      const botMessage: Message = {
-        id: Date.now() + 1,
-        sender: "bot",
-        content: PAYMENT_RESPONSE,
-        timestamp: new Date(Date.now() + 500),
-      }
-      setTimeout(() => {
-        setMessages((prev) => [...prev, botMessage])
-      }, 500)
-    }
-
-    setUserInput("")
-  }
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
-    }
-  }
 
   return (
     <>
@@ -145,36 +86,19 @@ export default function LiveChatBot() {
           </CardHeader>
 
           <CardContent className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
-            {messages.length > 0 ? (
-              messages.map((message) => (
-                <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
-                  <div
-                    className={`max-w-[80%] rounded-lg px-4 py-3 text-sm ${
-                      message.sender === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap">{message.content}</div>
-                    <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
-                      {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
-                <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
-                <div className="text-xs text-gray-500">My name is {AGENT_NAME}, {AGENT_ROLE.toLowerCase()}.</div>
-                <div className="text-xs text-gray-500">Please let me know how I can assist you today.</div>
-              </div>
-            )}
+            <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
+              <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
+              <div className="text-xs text-gray-500">My name is {AGENT_NAME}, {AGENT_ROLE.toLowerCase()}.</div>
+              <div className="text-xs text-gray-500">Please let me know how I can assist you today.</div>
+            </div>
 
             {showFAQ && (
-              <div className="space-y-2 mt-4">
+              <div className="space-y-3 mt-4">
                 {FAQ_DATA.map((faq, index) => (
-                  <div key={index} className="border rounded-lg overflow-hidden bg-white">
+                  <div key={index} className="w-full border rounded-[12px] overflow-hidden bg-white min-h-[60px]">
                     <button
                       onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
-                      className="w-full text-left px-3 py-2 hover:bg-blue-50 flex items-center justify-between text-xs font-medium text-gray-800"
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 flex items-center justify-between text-sm font-medium text-gray-800"
                     >
                       <span className="line-clamp-1">{faq.q}</span>
                       <ChevronDown
@@ -183,7 +107,7 @@ export default function LiveChatBot() {
                       />
                     </button>
                     {expandedFAQ === index && (
-                      <div className="px-3 py-2 bg-gray-50 border-t text-xs text-gray-700 leading-relaxed">
+                      <div className="px-4 py-3 bg-gray-50 border-t text-sm text-gray-700 leading-relaxed">
                         {faq.a}
                       </div>
                     )}
@@ -196,31 +120,6 @@ export default function LiveChatBot() {
           </CardContent>
 
           <div className="p-4 border-t bg-gray-50 rounded-b-lg space-y-2">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Type your message..."
-                className="flex-1 px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Button
-                onClick={handleSendMessage}
-                size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Send
-              </Button>
-            </div>
-            <Button
-              onClick={() => setShowFAQ(!showFAQ)}
-              variant="outline"
-              size="sm"
-              className="w-full text-xs"
-            >
-              {showFAQ ? "Hide" : "Show"} FAQ
-            </Button>
             <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 w-full text-center">
               Online - {AGENT_NAME}
             </Badge>
