@@ -21,24 +21,19 @@ interface FAQItem {
 const AGENT_NAME = "Michael Anderson"
 const AGENT_ROLE = "Support Manager"
 
-const REVIEW_MESSAGE = `Thank you for contacting Support.
+const AUTO_REPLY_MESSAGE = `Thank you for contacting Support.
 
-We have received all of your questions and requests.
+We have received your message successfully.
 
-Your case has been forwarded to our Further Review Team for detailed investigation.
+Your request has been submitted for further review and investigation.
 
-Our team is currently reviewing all pending requests, payment records, withdrawal history, and processing logs to determine the reason for the delay.
+Our team is currently reviewing payment records, withdrawal details, and processing logs.
 
-Please allow approximately 12–24 hours for the investigation process to be completed.
+Please allow 12–24 hours for the review process to be completed.
 
-After the review is finished, we will provide you with a complete explanation regarding:
+Once the investigation is finished, we will provide a complete update regarding your request.
 
-• Why your payment has not been released.
-• Why your withdrawal is still pending.
-• Why processing times are slower than expected.
-• The estimated release schedule for your payment.
-
-Thank you for your patience and understanding.
+Thank you for your patience.
 
 ${AGENT_NAME}
 ${AGENT_ROLE}`
@@ -76,11 +71,6 @@ export default function LiveChatBot() {
   const [userInput, setUserInput] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const isCustomQuestion = (text: string): boolean => {
-    const lowerText = text.toLowerCase()
-    return FAQ_DATA.some((faq) => lowerText.includes(faq.q.toLowerCase()) || faq.q.toLowerCase().includes(lowerText))
-  }
-
   const handleSendMessage = () => {
     if (!userInput.trim()) return
 
@@ -94,18 +84,16 @@ export default function LiveChatBot() {
 
     setMessages((prev) => [...prev, userMessage])
 
-    // Reply if it's a custom question
-    if (isCustomQuestion(userInput)) {
-      const botMessage: Message = {
-        id: Date.now() + 1,
-        sender: "bot",
-        content: REVIEW_MESSAGE,
-        timestamp: new Date(Date.now() + 500),
-      }
-      setTimeout(() => {
-        setMessages((prev) => [...prev, botMessage])
-      }, 500)
+    // Always reply to every message
+    const botMessage: Message = {
+      id: Date.now() + 1,
+      sender: "bot",
+      content: AUTO_REPLY_MESSAGE,
+      timestamp: new Date(Date.now() + 500),
     }
+    setTimeout(() => {
+      setMessages((prev) => [...prev, botMessage])
+    }, 500)
 
     setUserInput("")
   }
