@@ -18,40 +18,46 @@ interface FAQItem {
   a: string
 }
 
+const AGENT_NAME = "Michael Anderson"
+const AGENT_ROLE = "Support Manager"
+
 const FAQ_DATA: FAQItem[] = [
-  { q: "Why is my payment on hold?", a: "Your payment is currently under finance review for verification and security checks." },
-  { q: "How long does the review take?", a: "Most reviews are completed within 4–7 hours, but some cases may require additional verification." },
-  { q: "Why was my withdrawal delayed?", a: "The withdrawal is being reviewed to ensure account and payment details are correct." },
-  { q: "Is my payment safe?", a: "Yes, your payment remains secure while the review is in progress." },
-  { q: "Can I cancel my withdrawal?", a: "Yes, if processing has not been completed yet." },
-  { q: "Why is my withdrawal marked as pending?", a: "Pending status means the payment is awaiting final approval." },
-  { q: "Do I need to verify my account?", a: "Additional verification may be required depending on account activity." },
-  { q: "Has my payment been sent?", a: "Please wait for the review result. Once approved, the status will be updated." },
-  { q: "Can I change my wallet address?", a: "Wallet changes may require a new verification review." },
-  { q: "Why is the processing taking longer?", a: "Some transactions require manual finance review." },
-  { q: "Will I receive a notification?", a: "Yes, you will receive an update once the review is completed." },
-  { q: "What causes payment holds?", a: "Verification checks, account updates, or payment security reviews." },
-  { q: "Can I submit another withdrawal?", a: "It is recommended to wait until the current review is completed." },
-  { q: "Why is my balance not released?", a: "Your balance is currently being checked by the finance team." },
-  { q: "What happens after approval?", a: "The withdrawal will be processed and released." },
-  { q: "Can support speed up the review?", a: "Support can review your case but cannot bypass verification requirements." },
-  { q: "Is there an issue with my TRC20 address?", a: "The finance team is verifying all payment details." },
-  { q: "How do I know if my withdrawal is approved?", a: "The withdrawal status will change from Pending to Approved or Completed." },
-  { q: "Why was my withdrawal selected for review?", a: "Random security and compliance checks may trigger a review." },
-  { q: "When will I get the final update?", a: "A detailed update will be provided once all checks are completed." },
+  { q: "Why is my payment pending?", a: "Your payment is currently under review and verification." },
+  { q: "When will my withdrawal be released?", a: "The estimated processing time depends on the current review status." },
+  { q: "Why is my withdrawal on hold?", a: "Additional verification or account review may be required." },
+  { q: "Is my payment safe?", a: "Yes, your funds remain secure during the review process." },
+  { q: "Can I change my wallet address?", a: "Wallet changes may require additional verification." },
+  { q: "Why has my payment not arrived yet?", a: "Our team is reviewing the transaction details." },
+  { q: "Can I cancel my withdrawal?", a: "Cancellation availability depends on the processing stage." },
+  { q: "How long does review take?", a: "Review times vary depending on account activity." },
+  { q: "Will I receive an update?", a: "Yes, updates will be provided after the review is completed." },
+  { q: "Do I need KYC verification?", a: "Verification requirements depend on account status." },
+  { q: "Why was my payment selected for review?", a: "Security checks are performed to protect all transactions." },
+  { q: "Can support speed up my withdrawal?", a: "The review process cannot be bypassed." },
+  { q: "Why is my status active?", a: "Active status means the withdrawal request is currently being processed." },
+  { q: "When are withdrawals processed?", a: "Withdrawals are normally processed according to the payment schedule." },
+  { q: "What if my wallet address is incorrect?", a: "Please contact support immediately for assistance." },
+  { q: "Can I submit another withdrawal?", a: "It is recommended to wait until the current request is completed." },
+  { q: "Why is my balance unavailable?", a: "Funds may be temporarily reserved during processing." },
+  { q: "Can I receive payment through another method?", a: "Available methods depend on your account settings." },
+  { q: "How can I contact support again?", a: "You may reopen Live Chat at any time." },
+  { q: "When will I get a final answer?", a: "A complete update will be provided after review." },
 ]
 
-const PAYMENT_KEYWORDS = ["payment", "withdrawal", "pending", "review", "hold", "finance", "balance"]
+const PAYMENT_KEYWORDS = ["payment", "withdrawal", "pending", "review", "hold", "finance", "balance", "kyc", "verification"]
 
-const PAYMENT_RESPONSE = `Thank you for contacting Finance Support.
+const PAYMENT_RESPONSE = `Thank you for contacting support.
 
-We have received your request and are currently reviewing your account, payment details, and withdrawal records.
+We have received all of your questions and requests.
 
-Our team is checking all information and will provide an update as soon as the review is completed.
+All information will be reviewed carefully.
 
-Estimated review time: 4–7 hours.
+After the review process is completed, we will provide you with a detailed update regarding your request.
 
-Please wait while we verify the details.`
+Thank you for your patience.
+
+${AGENT_NAME}
+${AGENT_ROLE}`
 
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
@@ -121,10 +127,10 @@ export default function LiveChatBot() {
                 <MessageCircle className="h-4 w-4 text-blue-600" />
               </div>
               <div>
-                <CardTitle className="text-sm font-medium">Finance Support Team</CardTitle>
+                <CardTitle className="text-sm font-medium">{AGENT_NAME}</CardTitle>
                 <div className="flex items-center space-x-1 text-xs">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span>Online</span>
+                  <span>{AGENT_ROLE}</span>
                 </div>
               </div>
             </div>
@@ -156,8 +162,9 @@ export default function LiveChatBot() {
               ))
             ) : (
               <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
-                <div className="text-sm font-medium text-gray-700">Welcome to Finance Support</div>
-                <div className="text-xs text-gray-500">Ask us about payments, withdrawals, and account reviews</div>
+                <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
+                <div className="text-xs text-gray-500">My name is {AGENT_NAME}, {AGENT_ROLE.toLowerCase()}.</div>
+                <div className="text-xs text-gray-500">Please let me know how I can assist you today.</div>
               </div>
             )}
 
@@ -215,7 +222,7 @@ export default function LiveChatBot() {
               {showFAQ ? "Hide" : "Show"} FAQ
             </Button>
             <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 w-full text-center">
-              Online - Finance Support Team
+              Online - {AGENT_NAME}
             </Badge>
           </div>
         </Card>
