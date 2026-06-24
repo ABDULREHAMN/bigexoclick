@@ -21,24 +21,24 @@ interface FAQItem {
 const AGENT_NAME = "Michael Anderson"
 const AGENT_ROLE = "Support Manager"
 
-const REVIEW_MESSAGE = `Thank you for contacting Support Manager.
+const REVIEW_MESSAGE = `Thank you for contacting Support.
 
-We have received and reviewed all of your questions and requests.
+We have received all of your questions and requests.
 
-Your request has been submitted for further review.
+Your case has been forwarded to our Further Review Team for detailed investigation.
 
-Our team will carefully investigate the reason for the payment delay, pending withdrawals, and slow processing times.
+Our team is currently reviewing all pending requests, payment records, withdrawal history, and processing logs to determine the reason for the delay.
 
-After the review process is completed, we will provide you with a complete update.
+Please allow approximately 12–24 hours for the investigation process to be completed.
 
-Estimated response time: 12–24 hours.
+After the review is finished, we will provide you with a complete explanation regarding:
 
-We will explain:
 • Why your payment has not been released.
-• Why withdrawals are processing slowly.
-• Why pending requests have not yet been completed.
+• Why your withdrawal is still pending.
+• Why processing times are slower than expected.
+• The estimated release schedule for your payment.
 
-Thank you for your patience.
+Thank you for your patience and understanding.
 
 ${AGENT_NAME}
 ${AGENT_ROLE}`
