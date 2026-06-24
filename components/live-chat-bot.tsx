@@ -6,6 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, X, ChevronDown } from "lucide-react"
 
+interface Message {
+  id: number
+  sender: "bot" | "user"
+  content: string
+  timestamp: Date
+}
+
 interface FAQItem {
   q: string
   a: string
@@ -13,6 +20,28 @@ interface FAQItem {
 
 const AGENT_NAME = "Michael Anderson"
 const AGENT_ROLE = "Support Manager"
+
+const REVIEW_MESSAGE = `Thank you for contacting Support Manager.
+
+We have received and reviewed all of your questions and requests.
+
+Your request has been submitted for further review.
+
+Our team will carefully investigate the reason for the payment delay, pending withdrawals, and slow processing times.
+
+After the review process is completed, we will provide you with a complete update.
+
+Estimated response time: 12–24 hours.
+
+We will explain:
+• Why your payment has not been released.
+• Why withdrawals are processing slowly.
+• Why pending requests have not yet been completed.
+
+Thank you for your patience.
+
+${AGENT_NAME}
+${AGENT_ROLE}`
 
 const FAQ_DATA: FAQItem[] = [
   { q: "Why is my payment pending?", a: "Your payment is currently under review and verification." },
@@ -41,10 +70,52 @@ const FAQ_DATA: FAQItem[] = [
 
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState<Message[]>([])
   const [showFAQ, setShowFAQ] = useState(true)
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
   const [userInput, setUserInput] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const isCustomQuestion = (text: string): boolean => {
+    const lowerText = text.toLowerCase()
+    return FAQ_DATA.some((faq) => lowerText.includes(faq.q.toLowerCase()) || faq.q.toLowerCase().includes(lowerText))
+  }
+
+  const handleSendMessage = () => {
+    if (!userInput.trim()) return
+
+    // Add user message
+    const userMessage: Message = {
+      id: Date.now(),
+      sender: "user",
+      content: userInput,
+      timestamp: new Date(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+
+    // Reply if it's a custom question
+    if (isCustomQuestion(userInput)) {
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        sender: "bot",
+        content: REVIEW_MESSAGE,
+        timestamp: new Date(Date.now() + 500),
+      }
+      setTimeout(() => {
+        setMessages((prev) => [...prev, botMessage])
+      }, 500)
+    }
+
+    setUserInput("")
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSendMessage()
+    }
+  }
 
 
 
@@ -86,13 +157,30 @@ export default function LiveChatBot() {
           </CardHeader>
 
           <CardContent className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
-            <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
-              <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
-              <div className="text-xs text-gray-500">My name is {AGENT_NAME}, {AGENT_ROLE.toLowerCase()}.</div>
-              <div className="text-xs text-gray-500">Please let me know how I can assist you today.</div>
-            </div>
+            {messages.length > 0 ? (
+              messages.map((message) => (
+                <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+                  <div
+                    className={`max-w-[80%] rounded-lg px-4 py-3 text-sm ${
+                      message.sender === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
+                    }`}
+                  >
+                    <div className="whitespace-pre-wrap">{message.content}</div>
+                    <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
+                      {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
+                <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
+                <div className="text-xs text-gray-500">My name is {AGENT_NAME}, {AGENT_ROLE.toLowerCase()}.</div>
+                <div className="text-xs text-gray-500">Please let me know how I can assist you today.</div>
+              </div>
+            )}
 
-            {showFAQ && (
+            {messages.length === 0 && showFAQ && (
               <div className="space-y-3 mt-4">
                 {FAQ_DATA.map((faq, index) => (
                   <div key={index} className="w-full border rounded-[12px] overflow-hidden bg-white min-h-[60px]">
@@ -120,6 +208,23 @@ export default function LiveChatBot() {
           </CardContent>
 
           <div className="p-4 border-t bg-gray-50 rounded-b-lg space-y-2">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your question..."
+                className="flex-1 px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <Button
+                onClick={handleSendMessage}
+                size="sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Send
+              </Button>
+            </div>
             <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 w-full text-center">
               Online - {AGENT_NAME}
             </Badge>
