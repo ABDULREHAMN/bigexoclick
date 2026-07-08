@@ -20,22 +20,22 @@ export async function GET(
   }
 }
 
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
     const body = await request.json()
-    const { status, reasonForRejection, verifiedBy } = body
+    const { status, reason_for_rejection, verified_by } = body
 
     if (!status) {
       return NextResponse.json({ error: 'status is required' }, { status: 400 })
     }
 
     const verification = await updateVerificationStatus(id, status, {
-      reason_for_rejection: reasonForRejection,
-      verified_by: verifiedBy,
+      reason_for_rejection,
+      verified_by,
     })
 
     return NextResponse.json(verification)
