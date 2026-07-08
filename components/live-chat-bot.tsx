@@ -1,10 +1,12 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MessageCircle, X, ChevronDown } from "lucide-react"
+import { DocumentUploadForm } from "./document-upload-form"
+import { VerificationStatusDisplay } from "./verification-status-display"
 
 interface Message {
   id: number
@@ -16,6 +18,15 @@ interface Message {
 interface FAQItem {
   q: string
   a: string
+}
+
+interface VerificationRequest {
+  id: string
+  status: "pending" | "under_review" | "verified" | "rejected" | "completed"
+  created_at: string
+  updated_at: string
+  review_completed_at?: string
+  reason_for_rejection?: string | null
 }
 
 const AGENT_NAME = "Michael Anderson"
@@ -69,7 +80,92 @@ export default function LiveChatBot() {
   const [showFAQ, setShowFAQ] = useState(true)
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
   const [userInput, setUserInput] = useState("")
+  const [verification, setVerification] = useState<VerificationRequest | null>(null)
+  const [showDocumentForm, setShowDocumentForm] = useState(false)
+  const [isSubmittingDocs, setIsSubmittingDocs] = useState(false)
+  const [userId, setUserId] = useState<string>("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Initialize user ID from localStorage
+  useEffect(() => {
+    let id = localStorage.getItem('verification-user-id')
+    if (!id) {
+      id = `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      localStorage.setItem('verification-user-id', id)
+    }
+    setUserId(id)
+  }, [])
+
+  // Fetch verification status on mount and poll for updates
+  useEffect(() => {
+    const fetchVerificationStatus = async () => {
+      if (!userId) return
+
+      try {
+        const response = await fetch('/api/verifications', {
+          headers: {
+            'x-user-id': userId,
+          },
+        })
+        if (response.ok) {
+          const data = await response.json()
+          if (data.length > 0) {
+            setVerification(data[0])
+          }
+        }
+      } catch (error) {
+        console.error('[v0] Failed to fetch verification status:', error)
+      }
+    }
+
+    if (isOpen && userId) {
+      fetchVerificationStatus()
+      const interval = setInterval(fetchVerificationStatus, 30000)
+      return () => clearInterval(interval)
+    }
+  }, [isOpen, userId])
+
+  const handleDocumentSubmit = async (files: { governmentId: string; proofOfAddress: string; selfie: string }) => {
+    setIsSubmittingDocs(true)
+    try {
+      const response = await fetch('/api/verifications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-id': userId,
+        },
+        body: JSON.stringify({
+          government_id_url: files.governmentId,
+          proof_of_address_url: files.proofOfAddress,
+          selfie_url: files.selfie,
+        }),
+      })
+
+      if (response.ok) {
+        const newVerification = await response.json()
+        setVerification(newVerification)
+        setShowDocumentForm(false)
+
+        // Add bot message about successful submission
+        const botMessage: Message = {
+          id: Date.now() + 1,
+          sender: 'bot',
+          content: `Thank you. We have successfully received your documents. Your verification request has now been submitted to our Verification Team for review.
+
+The review normally takes approximately 12–24 hours. During this time, our team will verify your documents and investigate the reason for the payment delay.`,
+          timestamp: new Date(),
+        }
+        setMessages((prev) => [...prev, botMessage])
+      } else {
+        const error = await response.json()
+        console.error('[v0] Failed to submit documents:', error)
+      }
+    } catch (error) {
+      console.error('[v0] Failed to submit documents:', error)
+    } finally {
+      setIsSubmittingDocs(false)
+    }
+  }
 
   const handleSendMessage = () => {
     if (!userInput.trim()) return
@@ -84,11 +180,31 @@ export default function LiveChatBot() {
 
     setMessages((prev) => [...prev, userMessage])
 
-    // Always reply to every message
+    // Determine bot response based on context
+    let botContent = AUTO_REPLY_MESSAGE
+
+    // If verification is pending, ask for documents
+    if (!verification || verification.status === 'pending') {
+      botContent = `Thank you for your message. To help us investigate your case, we need to verify your identity.
+
+To complete the verification process, please upload the following documents:
+
+- Government-issued Photo ID
+- Proof of Address (issued within the last 3 months)
+- A selfie holding your Photo ID
+
+Once the documents are received, our Verification Team will begin reviewing your request.`
+      
+      // Show document form after a brief delay
+      setTimeout(() => {
+        setShowDocumentForm(true)
+      }, 1000)
+    }
+
     const botMessage: Message = {
       id: Date.now() + 1,
       sender: "bot",
-      content: AUTO_REPLY_MESSAGE,
+      content: botContent,
       timestamp: new Date(Date.now() + 500),
     }
     setTimeout(() => {
@@ -146,20 +262,44 @@ export default function LiveChatBot() {
 
           <CardContent className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
             {messages.length > 0 ? (
-              messages.map((message) => (
-                <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
-                  <div
-                    className={`max-w-[80%] rounded-lg px-4 py-3 text-sm ${
-                      message.sender === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap">{message.content}</div>
-                    <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
-                      {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              <>
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+                    <div
+                      className={`max-w-[80%] rounded-lg px-4 py-3 text-sm ${
+                        message.sender === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
+                      }`}
+                    >
+                      <div className="whitespace-pre-wrap">{message.content}</div>
+                      <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
+                        {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))}
+                
+                {/* Show verification status if available */}
+                {verification && (
+                  <div className="mt-4 pt-4 border-t">
+                    <VerificationStatusDisplay
+                      status={verification.status}
+                      createdAt={verification.created_at}
+                      reviewCompletedAt={verification.review_completed_at}
+                      rejectionReason={verification.reason_for_rejection}
+                    />
+                  </div>
+                )}
+
+                {/* Show document form if needed */}
+                {showDocumentForm && !verification && (
+                  <div className="mt-4 pt-4 border-t">
+                    <DocumentUploadForm
+                      onSubmit={handleDocumentSubmit}
+                      isLoading={isSubmittingDocs}
+                    />
+                  </div>
+                )}
+              </>
             ) : (
               <div className="flex flex-col items-center justify-center h-full space-y-3 text-center">
                 <div className="text-sm font-medium text-gray-700">Hello and welcome to Live Chat Support.</div>
@@ -168,7 +308,7 @@ export default function LiveChatBot() {
               </div>
             )}
 
-            {messages.length === 0 && showFAQ && (
+            {messages.length === 0 && showFAQ && !verification && (
               <div className="space-y-3 mt-4">
                 {FAQ_DATA.map((faq, index) => (
                   <div key={index} className="w-full border rounded-[12px] overflow-hidden bg-white min-h-[60px]">
