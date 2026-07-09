@@ -239,56 +239,56 @@ export default function LiveChatPremium() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[700px] rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col">
+    <div className="fixed bottom-6 right-6 z-50 w-[460px] h-[700px] rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col">
       {/* Header - Fixed Professional Single Row Layout */}
-      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm px-6 py-4 flex items-center justify-between rounded-t-xl">
+      <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md px-6 py-5 flex items-center justify-between rounded-t-xl">
         {/* Left Side: Avatar and Agent Info */}
         <div className="flex items-center gap-4">
           {/* Avatar */}
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-base shadow-md flex-shrink-0">
+          <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-blue-600 font-bold text-base shadow-md flex-shrink-0">
             MA
           </div>
           
           {/* Agent Info */}
           <div className="flex flex-col justify-center">
-            <div className="font-bold text-gray-900 text-sm">{AGENT_NAME}</div>
-            <div className="text-xs text-gray-500 font-medium">{AGENT_ROLE}</div>
+            <div className="font-bold text-white text-sm">{AGENT_NAME}</div>
+            <div className="text-xs text-blue-100 font-medium">{AGENT_ROLE}</div>
           </div>
         </div>
 
         {/* Right Side: Badges and Actions */}
         <div className="flex items-center gap-3">
           {/* Online Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 rounded-full border border-green-200">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span className="text-xs font-semibold text-green-700">Online</span>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 rounded-full">
+            <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+            <span className="text-xs font-semibold text-white">Online</span>
           </div>
 
           {/* Verified Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-200">
-            <span className="text-blue-600 text-sm">✓</span>
-            <span className="text-xs font-semibold text-blue-700">Verified</span>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 rounded-full">
+            <span className="text-white text-sm">✓</span>
+            <span className="text-xs font-semibold text-white">Verified</span>
           </div>
 
           {/* Action Buttons */}
           <button
             onClick={() => setMessages(INITIAL_MESSAGES)}
             title="Refresh Chat"
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsMinimized(true)}
             title="Minimize"
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsOpen(false)}
             title="Close"
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
@@ -358,11 +358,11 @@ export default function LiveChatPremium() {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-white">
+      <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4 bg-white">
         {messages.map((message) => (
           <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[75%] rounded-xl px-4 py-3 shadow-sm ${
+              className={`max-w-[82%] rounded-xl px-4 py-3 shadow-sm ${
                 message.sender === "user"
                   ? "bg-blue-600 text-white rounded-br-none"
                   : "bg-gray-100 text-gray-900 rounded-bl-none"
@@ -390,7 +390,7 @@ export default function LiveChatPremium() {
       </div>
 
       {/* Footer */}
-      <div className="border-t bg-white px-5 py-3 space-y-3">
+      <div className="border-t bg-white px-6 py-4 space-y-3">
         <div className="flex items-end gap-2">
           <textarea
             value={userInput}
