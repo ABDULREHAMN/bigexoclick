@@ -240,43 +240,55 @@ export default function LiveChatPremium() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 w-96 h-[700px] rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col">
-      {/* Header - Fixed */}
-      <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-5 flex items-center justify-between border-b border-blue-800 shadow-md">
-        <div className="flex items-center gap-3 flex-1">
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 font-bold text-sm shadow-sm">
+      {/* Header - Fixed Professional Single Row Layout */}
+      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm px-6 py-4 flex items-center justify-between rounded-t-xl">
+        {/* Left Side: Avatar and Agent Info */}
+        <div className="flex items-center gap-4">
+          {/* Avatar */}
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-base shadow-md flex-shrink-0">
             MA
           </div>
-          <div className="flex-1">
-            <div className="font-semibold text-sm">{AGENT_NAME}</div>
-            <div className="text-xs text-blue-100">{AGENT_ROLE}</div>
-            <div className="flex items-center gap-1.5 text-xs mt-0.5">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span>Online • Active Now</span>
-            </div>
+          
+          {/* Agent Info */}
+          <div className="flex flex-col justify-center">
+            <div className="font-bold text-gray-900 text-sm">{AGENT_NAME}</div>
+            <div className="text-xs text-gray-500 font-medium">{AGENT_ROLE}</div>
           </div>
-          <span className="ml-auto text-xs bg-blue-500 px-2 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
-            <span>✓</span> Verified
-          </span>
         </div>
-        <div className="flex gap-1 ml-3">
+
+        {/* Right Side: Badges and Actions */}
+        <div className="flex items-center gap-3">
+          {/* Online Badge */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 rounded-full border border-green-200">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="text-xs font-semibold text-green-700">Online</span>
+          </div>
+
+          {/* Verified Badge */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-200">
+            <span className="text-blue-600 text-sm">✓</span>
+            <span className="text-xs font-semibold text-blue-700">Verified</span>
+          </div>
+
+          {/* Action Buttons */}
           <button
             onClick={() => setMessages(INITIAL_MESSAGES)}
             title="Refresh Chat"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsMinimized(true)}
             title="Minimize"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsOpen(false)}
             title="Close"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900"
           >
             <X className="w-4 h-4" />
           </button>
