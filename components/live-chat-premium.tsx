@@ -240,55 +240,57 @@ export default function LiveChatPremium() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 w-[460px] h-[700px] rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col">
-      {/* Header - Fixed Professional Single Row Layout */}
-      <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md px-6 py-5 flex items-center justify-between rounded-t-xl">
-        {/* Left Side: Avatar and Agent Info */}
-        <div className="flex items-center gap-4">
+      {/* Header - Professional Premium Support Layout */}
+      <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg px-5 py-4 flex items-center justify-between rounded-t-xl" style={{height: '80px'}}>
+        {/* Left Section: Avatar and Agent Info */}
+        <div className="flex items-center gap-3 flex-shrink-0">
           {/* Avatar */}
           <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-blue-600 font-bold text-base shadow-md flex-shrink-0">
             MA
           </div>
           
           {/* Agent Info */}
-          <div className="flex flex-col justify-center">
-            <div className="font-bold text-white text-sm">{AGENT_NAME}</div>
-            <div className="text-xs text-blue-100 font-medium">{AGENT_ROLE}</div>
+          <div className="flex flex-col justify-center gap-0.5">
+            <div className="font-bold text-white text-base whitespace-nowrap">{AGENT_NAME}</div>
+            <div className="text-xs text-blue-100 font-normal">{AGENT_ROLE}</div>
           </div>
         </div>
 
-        {/* Right Side: Badges and Actions */}
-        <div className="flex items-center gap-3">
-          {/* Online Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 rounded-full">
-            <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
-            <span className="text-xs font-semibold text-white">Online</span>
+        {/* Center Section: Compact Badges */}
+        <div className="flex items-center gap-2 flex-1 justify-center">
+          {/* Online Badge - Compact */}
+          <div className="flex items-center gap-1 px-2.5 py-1 bg-green-500 rounded-full shadow-sm">
+            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+            <span className="text-xs font-semibold text-white whitespace-nowrap">Online</span>
           </div>
 
-          {/* Verified Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 rounded-full">
-            <span className="text-white text-sm">✓</span>
-            <span className="text-xs font-semibold text-white">Verified</span>
+          {/* Verified Badge - Compact */}
+          <div className="flex items-center gap-1 px-2.5 py-1 border border-white rounded-full shadow-sm">
+            <span className="text-white text-xs font-bold">✓</span>
+            <span className="text-xs font-semibold text-white whitespace-nowrap">Verified</span>
           </div>
+        </div>
 
-          {/* Action Buttons */}
+        {/* Right Section: Action Icons */}
+        <div className="flex items-center gap-4 flex-shrink-0">
           <button
             onClick={() => setMessages(INITIAL_MESSAGES)}
             title="Refresh Chat"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
+            className="p-1.5 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsMinimized(true)}
             title="Minimize"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
+            className="p-1.5 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsOpen(false)}
             title="Close"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors text-white hover:text-white"
+            className="p-1.5 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             <X className="w-4 h-4" />
           </button>
