@@ -23,10 +23,10 @@ const VERIFICATION_STEPS: VerificationStep[] = [
   { name: "Account Verification", status: "completed" },
   { name: "Payment Method Verification", status: "completed" },
   { name: "Security Verification", status: "completed" },
-  { name: "Finance Department Review", status: "in_progress" },
-  { name: "Fund Receipt Verification", status: "in_progress" },
-  { name: "Payment Authorization", status: "pending" },
-  { name: "Payment Release", status: "pending" },
+  { name: "Finance Department Review", status: "completed" },
+  { name: "Fund Receipt Verification", status: "completed" },
+  { name: "Payment Authorization", status: "completed" },
+  { name: "Payment Release", status: "in_progress" },
 ]
 
 // Extended realistic conversation
@@ -114,6 +114,12 @@ const INITIAL_MESSAGES: Message[] = [
     sender: "bot",
     content: "You're welcome. Is there anything else I can help you with regarding your withdrawal or account?",
     timestamp: new Date(Date.now() - 6420000),
+  },
+  {
+    id: 15,
+    sender: "bot",
+    content: "Good news! Your verification has reached the final stage. Identity, Account, Payment Method, Security, Finance Review, Fund Receipt Verification, and Payment Authorization have all been completed successfully. Only the Payment Release stage remains, and it is currently in progress. Once this final step is completed, your withdrawal will be released automatically.",
+    timestamp: new Date(Date.now() - 6360000),
   },
 ]
 
