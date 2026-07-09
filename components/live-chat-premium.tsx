@@ -252,9 +252,6 @@ export default function LiveChatPremium() {
             <div className="flex items-center gap-1.5 text-xs mt-0.5">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
               <span>Online • Active Now</span>
-              <span className="ml-1 px-1.5 py-0.5 bg-green-500 rounded-full text-xs inline-flex items-center gap-1">
-                <span>✓</span> Usually replies within minutes
-              </span>
             </div>
           </div>
           <span className="ml-auto text-xs bg-blue-500 px-2 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
