@@ -149,6 +149,7 @@ export default function LiveChatPremium() {
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
   const [userInput, setUserInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [showVerificationPanel, setShowVerificationPanel] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -239,41 +240,46 @@ export default function LiveChatPremium() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 w-96 h-[700px] rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 font-bold text-sm">
+      {/* Header - Fixed */}
+      <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-5 flex items-center justify-between border-b border-blue-800 shadow-md">
+        <div className="flex items-center gap-3 flex-1">
+          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 font-bold text-sm shadow-sm">
             MA
           </div>
-          <div>
+          <div className="flex-1">
             <div className="font-semibold text-sm">{AGENT_NAME}</div>
             <div className="text-xs text-blue-100">{AGENT_ROLE}</div>
-            <div className="flex items-center gap-1 text-xs">
-              <span className="w-2 h-2 bg-green-400 rounded-full inline-block"></span>
-              <span>Online • Typically replies within a few minutes</span>
+            <div className="flex items-center gap-1.5 text-xs mt-0.5">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span>Online • Active Now</span>
+              <span className="ml-1 px-1.5 py-0.5 bg-green-500 rounded-full text-xs inline-flex items-center gap-1">
+                <span>✓</span> Usually replies within minutes
+              </span>
             </div>
           </div>
-          <span className="ml-auto text-xs bg-blue-500 px-2 py-1 rounded-full">✓ Verified</span>
+          <span className="ml-auto text-xs bg-blue-500 px-2 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
+            <span>✓</span> Verified
+          </span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1 ml-3">
           <button
             onClick={() => setMessages(INITIAL_MESSAGES)}
             title="Refresh Chat"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsMinimized(true)}
             title="Minimize"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsOpen(false)}
             title="Close"
-            className="p-2 hover:bg-blue-500 rounded-lg transition-colors"
+            className="p-2 hover:bg-blue-500 rounded-lg transition-colors hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
@@ -281,10 +287,16 @@ export default function LiveChatPremium() {
       </div>
 
       {/* Verification Progress Card */}
-      <div className="px-6 py-4 bg-gray-50 border-b">
+      <button
+        onClick={() => setShowVerificationPanel(!showVerificationPanel)}
+        className="w-full px-6 py-4 bg-gray-50 border-b hover:bg-gray-100 transition-colors text-left"
+      >
         <div className="mb-3">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-semibold text-gray-800 text-sm">Verification Progress</h3>
+            <h3 className="font-semibold text-gray-800 text-sm flex items-center gap-2">
+              Verification Progress
+              <span className={`text-xs transition-transform ${showVerificationPanel ? "rotate-180" : ""}`}>▼</span>
+            </h3>
             <span className="text-xs font-semibold text-blue-600">{completedCount} / {totalSteps} Completed</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
@@ -294,7 +306,33 @@ export default function LiveChatPremium() {
             ></div>
           </div>
         </div>
-      </div>
+      </button>
+
+      {/* Verification Details Panel */}
+      {showVerificationPanel && (
+        <div className="max-h-64 overflow-y-auto border-b bg-white">
+          <div className="px-6 py-4 space-y-3">
+            {VERIFICATION_STEPS.map((step, index) => (
+              <div key={index} className="pb-3 border-b last:border-b-0">
+                <div className="flex items-start gap-3">
+                  <span className="text-lg flex-shrink-0">{getStatusIcon(step.status)}</span>
+                  <div className="flex-1">
+                    <div className="font-medium text-sm text-gray-900">{step.name}</div>
+                    <div className={`text-xs mt-1 ${getStatusColor(step.status)}`}>
+                      {step.status === "completed" && "Completed"}
+                      {step.status === "in_progress" && "In Progress"}
+                      {step.status === "pending" && "Pending"}
+                    </div>
+                    {step.status === "completed" && (
+                      <div className="text-xs text-gray-500 mt-1">Completed on {new Date().toLocaleDateString()}</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Finance Review Card */}
       <div className="px-6 py-3 bg-blue-50 border-b text-xs">
@@ -311,18 +349,18 @@ export default function LiveChatPremium() {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 bg-white">
+      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-white">
         {messages.map((message) => (
           <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[70%] rounded-lg px-4 py-3 ${
+              className={`max-w-[75%] rounded-xl px-4 py-3 shadow-sm ${
                 message.sender === "user"
                   ? "bg-blue-600 text-white rounded-br-none"
                   : "bg-gray-100 text-gray-900 rounded-bl-none"
               }`}
             >
-              <div className="text-sm">{message.content}</div>
-              <div className={`text-xs mt-1 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
+              <div className="text-sm leading-relaxed">{message.content}</div>
+              <div className={`text-xs mt-2 ${message.sender === "user" ? "text-blue-100" : "text-gray-500"}`}>
                 {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </div>
             </div>
@@ -330,7 +368,7 @@ export default function LiveChatPremium() {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 text-gray-900 rounded-lg rounded-bl-none px-4 py-3">
+            <div className="bg-gray-100 text-gray-900 rounded-xl rounded-bl-none px-4 py-3 shadow-sm">
               <div className="flex gap-1">
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
@@ -343,35 +381,44 @@ export default function LiveChatPremium() {
       </div>
 
       {/* Footer */}
-      <div className="border-t bg-gray-50 px-6 py-4 space-y-2">
+      <div className="border-t bg-white px-5 py-3 space-y-3">
         <div className="flex items-end gap-2">
           <textarea
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={(e) => setUserInput(e.target.value.slice(0, 500))}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
-            className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none max-h-20"
+            className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none max-h-24"
             rows={2}
             disabled={isLoading}
           />
           <button
             onClick={handleSendMessage}
             disabled={isLoading || !userInput.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white p-2 rounded-lg transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-3 py-2 rounded-lg transition-colors font-medium text-sm"
+            title="Send message"
           >
             <Send className="w-4 h-4" />
           </button>
         </div>
-        <div className="flex items-center justify-between text-xs text-gray-500">
-          <div className="flex gap-2">
-            <button className="p-1 hover:bg-gray-200 rounded transition-colors" title="Attach">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-1">
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900" 
+              title="Attach file"
+              disabled={isLoading}
+            >
               <Paperclip className="w-4 h-4" />
             </button>
-            <button className="p-1 hover:bg-gray-200 rounded transition-colors" title="Emoji">
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-600 hover:text-gray-900" 
+              title="Add emoji"
+              disabled={isLoading}
+            >
               <Smile className="w-4 h-4" />
             </button>
           </div>
-          <span>{userInput.length}/500</span>
+          <span className="text-xs text-gray-500">{userInput.length}/500</span>
         </div>
       </div>
     </div>
