@@ -16,7 +16,7 @@ import { NoCampaignsMessage } from "./no-campaigns-message"
 import { KycModal } from "./kyc-modal"
 import { SettingsContent } from "./settings-content"
 import { ProfileModal } from "./profile-modal"
-import LiveChatBotRedesigned from "./live-chat-bot-redesigned"
+import LiveChatBot from "./live-chat-bot-legacy"
 import { isLoggedIn } from "@/lib/auth"
 
 type PageType = "dashboard" | "payments" | "reports" | "sites" | "campaigns" | "settings" | "profile"
@@ -51,7 +51,7 @@ function DashboardContentWrapper() {
       <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
       <KycModal />
       <SettingsModal isOpen={isSettingsModalOpen} onClose={() => setIsSettingsModalOpen(false)} />
-      <LiveChatBotRedesigned />
+      <LiveChatBot />
     </div>
   )
 }

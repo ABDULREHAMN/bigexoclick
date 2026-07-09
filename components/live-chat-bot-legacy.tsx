@@ -74,10 +74,62 @@ const FAQ_DATA: FAQItem[] = [
 
 
 
+// Pre-loaded realistic conversation
+const INITIAL_MESSAGES: Message[] = [
+  {
+    id: 1,
+    sender: "user",
+    content: "Hello, my withdrawal has been pending for several days.",
+    timestamp: new Date(Date.now() - 3600000),
+  },
+  {
+    id: 2,
+    sender: "bot",
+    content: "Thank you for contacting Support. Let me review your account and payment details.",
+    timestamp: new Date(Date.now() - 3540000),
+  },
+  {
+    id: 3,
+    sender: "user",
+    content: "I have already completed verification. Why am I being asked again?",
+    timestamp: new Date(Date.now() - 3480000),
+  },
+  {
+    id: 4,
+    sender: "bot",
+    content: "Your withdrawal amount is significantly higher than normal. For security and compliance, additional verification is required before payment can be released.",
+    timestamp: new Date(Date.now() - 3420000),
+  },
+  {
+    id: 5,
+    sender: "user",
+    content: "Which verifications have already been completed?",
+    timestamp: new Date(Date.now() - 3360000),
+  },
+  {
+    id: 6,
+    sender: "bot",
+    content: "Identity Verification, Account Verification, Payment Method Verification, and Security Review have all been completed successfully.",
+    timestamp: new Date(Date.now() - 3300000),
+  },
+  {
+    id: 7,
+    sender: "user",
+    content: "What is still pending?",
+    timestamp: new Date(Date.now() - 3240000),
+  },
+  {
+    id: 8,
+    sender: "bot",
+    content: "Finance Review, Compliance Review, Final Payment Authorization, and Payment Release Queue are still in progress.",
+    timestamp: new Date(Date.now() - 3180000),
+  },
+]
+
 export default function LiveChatBot() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([])
-  const [showFAQ, setShowFAQ] = useState(true)
+  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
+  const [showFAQ, setShowFAQ] = useState(false)
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
   const [userInput, setUserInput] = useState("")
   const [verification, setVerification] = useState<VerificationRequest | null>(null)

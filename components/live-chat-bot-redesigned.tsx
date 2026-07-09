@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import { MessageCircle, X, Send, CheckCircle2 } from "lucide-react"
-import { VerificationProgressCard } from "./verification-progress-card"
 
 interface Message {
   id: number
@@ -265,10 +264,7 @@ function LiveChatBotRedesigned() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Verification progress card - shown before input */}
-      <div className="px-4 pt-4 bg-gray-50 border-t border-gray-200">
-        <VerificationProgressCard />
-      </div>
+
 
       {/* Input area */}
       <div className="p-4 border-t border-gray-200 bg-white">
